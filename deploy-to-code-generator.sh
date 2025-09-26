@@ -28,7 +28,7 @@ eval "$saved_set"
 set -eo pipefail
 
 # 配置项
-REPO_URL="git@github.com:zhuyizhuo/code-generator-doc.git"
+REPO_URL="git@github.com:zhuyizhuo/technical-graph-doc.git"
 BRANCH="gh-pages"
 PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
 BUILD_DIR="$PROJECT_DIR/docs/.vuepress/dist"
@@ -226,7 +226,7 @@ echo "当前目录: $(pwd)"
 
 # 打印完成信息
 printf "\n=== 文档部署成功！===\n"
-printf "访问地址：https://zhuyizhuo.github.io/code-generator-doc/\n\n"
+printf "访问地址：https://zhuyizhuo.github.io/technical-graph-doc/\n\n"
 
 # 脚本完成时间
 echo "脚本执行完成于 $(date '+%Y-%m-%d %H:%M:%S')"
