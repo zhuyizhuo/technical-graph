@@ -19,7 +19,17 @@ module.exports = {
           children: [
             "java-core/",
             "java-core/core",
-            {              title: "Java 版本新特性",              collapsable: true,              children: [                "java-core/java-new-features/",                "java-core/java-new-features/java8-new-features",                "java-core/java-new-features/java11-new-features",                "java-core/java-new-features/java17-new-features",                "java-core/java-new-features/java21-new-features"              ]            },
+            {
+              title: "Java 版本新特性",
+              collapsable: true,
+              children: [
+                "java-core/java-new-features/",
+                "java-core/java-new-features/java8-new-features",
+                "java-core/java-new-features/java11-new-features",
+                "java-core/java-new-features/java17-new-features",
+                "java-core/java-new-features/java21-new-features"
+              ]
+            },
             {
               title: "JVM",
               collapsable: true,

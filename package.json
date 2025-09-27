@@ -7,6 +7,12 @@
   "scripts": {
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
+    "docs:deploy": "bash deploy-to-code-generator.sh",
+    "docs:deploy:verbose": "bash deploy-to-code-generator.sh -v",
+    "docs:deploy:clean": "bash deploy-to-code-generator.sh -c",
+    "docs:deploy:win": "deploy-to-code-generator.sh",
+    "docs:deploy:verbose:win": "deploy-to-code-generator.sh -v",
+    "docs:deploy:clean:win": "deploy-to-code-generator.sh -c",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
  "resolutions": {
