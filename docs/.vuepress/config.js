@@ -103,6 +103,11 @@ module.exports = {
               children: ["framework-and-middleware/shardingsphere"]
             },
             {
+              title: "Spring Boot",
+              collapsable: true,
+              children: ["framework-and-middleware/springboot"]
+            },
+            {
               title: "Spring Cloud",
               collapsable: true,
               children: ["framework-and-middleware/spring-cloud"]
