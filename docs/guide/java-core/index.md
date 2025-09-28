@@ -33,6 +33,8 @@ Java 语言核心包括以下几个主要部分：
 - [Java 版本新特性](java-new-features/)
 - [JVM](jvm.md)
 - [并发编程](concurrency-programming/)
+- [Java RMI](java-rmi.md)
+- [Java SPI](java-spi.md)
 
 ## 参考资源
 

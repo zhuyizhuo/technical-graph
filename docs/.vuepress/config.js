@@ -39,6 +39,16 @@ module.exports = {
               title: "并发编程",
               collapsable: true,
               children: ["java-core/concurrency-programming/"]
+            },
+            {
+              title: "Java RMI",
+              collapsable: true,
+              children: ["java-core/java-rmi"]
+            },
+            {
+              title: "Java SPI",
+              collapsable: true,
+              children: ["java-core/java-spi"]
             }
           ]
         },
@@ -148,6 +158,16 @@ module.exports = {
               title: "配置管理",
               collapsable: true,
               children: ["containerization-and-cloud-native/configuration-management"]
+            },
+            {
+              title: "Nginx",
+              collapsable: true,
+              children: ["containerization-and-cloud-native/nginx"]
+            },
+            {
+              title: "MinIO",
+              collapsable: true,
+              children: ["containerization-and-cloud-native/minio"]
             }
           ]
         },
@@ -176,6 +196,20 @@ module.exports = {
               collapsable: true,
               children: ["distributed-system/distributed-scheduling"]
             }
+          ]
+        },
+        {
+          title: "测试与质量保障",
+          collapsable: false,
+          children: [
+            "test-and-quality"
+          ]
+        },
+        {
+          title: "开发工具与效率",
+          collapsable: false,
+          children: [
+            "development-tools"
           ]
         }
         // {
