@@ -126,6 +126,11 @@ module.exports = {
               title: "Spring Data",
               collapsable: true,
               children: ["framework-and-middleware/spring-data"]
+            },
+            {
+              title: "LDAP",
+              collapsable: true,
+              children: ["framework-and-middleware/ldap"]
             }
           ]
         },
@@ -211,12 +216,46 @@ module.exports = {
           children: [
             "development-tools"
           ]
-        }
-        // {
-        //   title: "系统安全",
-        //   collapsable: false,
-        //   children: ["system-security"]
-        // },
+        },
+        {
+          title: "系统安全",
+          collapsable: false,
+          children: [
+            "system-security",
+            {
+              title: "身份认证与授权",
+              collapsable: true,
+              children: [
+                "system-security/identity-authentication/oauth2",
+                "system-security/identity-authentication/jwt"
+              ]
+            },
+            {
+              title: "网络安全",
+              collapsable: true,
+              children: [
+                "system-security/network-security/https-ssl",
+                "system-security/network-security/firewall",
+                "system-security/network-security/network-isolation"
+              ]
+            }
+          ]
+        },
+        {
+          title: "架构设计",
+          collapsable: false,
+          children: [
+            "architecture-design/system-architecture",
+            "architecture-design/domain-driven-design",
+            {
+              title: "设计模式",
+              collapsable: true,
+              children: [
+                "architecture-design/design-patterns/index"
+              ]
+            }
+          ]
+        },
         // {
         //   title: "性能工程",
         //   collapsable: false,
