@@ -251,7 +251,7 @@ module.exports = {
               title: "设计模式",
               collapsable: true,
               children: [
-                "architecture-design/design-patterns/index"
+                "architecture-design/design-patterns/"
               ]
             }
           ]
