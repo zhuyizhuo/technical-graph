@@ -38,7 +38,11 @@ module.exports = {
             {
               title: "并发编程",
               collapsable: true,
-              children: ["java-core/concurrency-programming/"]
+              children: [
+                "java-core/concurrency-programming/",
+                "java-core/concurrency-programming/synchronized-lock",
+                "java-core/concurrency-programming/reentrant-lock"
+              ]
             },
             {
               title: "Java RMI",
