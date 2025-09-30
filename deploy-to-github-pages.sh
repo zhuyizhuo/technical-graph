@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # =======================================================
-# VuePress文档部署脚本 - 增强版
-# 功能：自动构建并部署VuePress文档到GitHub Pages
+# VitePress文档部署脚本 - 增强版
+# 功能：自动构建并部署VitePress文档到GitHub Pages
 # 作者：技术图谱团队
 # 日期：$(date '+%Y-%m-%d')
 # 
@@ -26,7 +26,7 @@ COMMIT_MESSAGE=""
 REPO_URL="git@github.com:zhuyizhuo/technical-graph-doc.git"
 BRANCH="gh-pages"
 PROJECT_DIR="$SCRIPT_DIR"
-BUILD_DIR="$PROJECT_DIR/docs/.vuepress/dist"
+BUILD_DIR="$PROJECT_DIR/docs/.vitepress/dist"
 NODE_MODULES_DIR="$PROJECT_DIR/node_modules"
 GIT_USER_NAME="GitHub Actions"
 GIT_USER_EMAIL="github-actions[bot]@users.noreply.github.com"
@@ -162,7 +162,7 @@ function install_deps() {
 }
 
 function build_docs() {
-    log_info "构建VuePress文档..."
+    log_info "构建VitePress文档..."
     
     # 清理构建目录（如果需要）
     if [ "$CLEAN" = true ] && [ -d "$BUILD_DIR" ]; then
@@ -182,7 +182,7 @@ function build_docs() {
     # 构建文档
     npm run docs:build
     if [ $? -ne 0 ]; then
-        log_error "文档构建失败。请检查VuePress配置。"
+        log_error "文档构建失败。请检查VitePress配置。"
         return 1
     fi
     
@@ -378,7 +378,7 @@ function main() {
     fi
     
     # 打印脚本开始信息
-    printf "\n=== VuePress文档部署工具 ===\n\n"
+    printf "\n=== VitePress文档部署工具 ===\n\n"
     log_info "当前项目目录: $PROJECT_DIR"
     log_info "构建目录: $BUILD_DIR"
     log_info "GitHub仓库地址: $REPO_URL"

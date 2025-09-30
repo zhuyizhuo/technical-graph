@@ -9,7 +9,7 @@
 
 **技术图谱** 是一个面向Java工程师的学习资源库，旨在帮助开发者系统地学习和掌握Java技术栈的核心知识，从Java语言基础到高级框架与中间件，再到分布式系统和云原生技术，构建完整的技术知识体系。
 
-本项目采用VuePress构建，提供了清晰的目录结构和丰富的学习资源，帮助开发者在技术成长道路上少走弯路，实现高效进阶。
+本项目采用VitePress构建，提供了清晰的目录结构和丰富的学习资源，帮助开发者在技术成长道路上少走弯路，实现高效进阶。
 
 ## ✨ 项目特点
 
@@ -25,7 +25,7 @@
 
 ```
 docs/
-├── guide/
+├── guide/                      # 主要内容目录
 │   ├── java-core/              # Java语言核心
 │   │   ├── core.md             # Java核心基础知识
 │   │   ├── java-new-features/  # Java各版本新特性
@@ -44,7 +44,8 @@ docs/
 │   ├── practice.md             # 工程实践
 │   ├── new-tech.md             # 新兴技术
 │   └── soft.md                 # 软技能
-└── .vuepress/                  # VuePress配置
+├── index.md                    # 首页
+└── .vitepress/                 # VitePress配置
 ```
 
 ## 🚀 快速开始
@@ -65,7 +66,7 @@ npm install
 npm run docs:dev
 ```
 
-启动后可以通过浏览器访问 [http://localhost:8080/technical-graph-doc/](http://localhost:8080/technical-graph-doc/) 查看文档。
+启动后可以通过浏览器访问 [http://localhost:5173/technical-graph-doc/](http://localhost:5173/technical-graph-doc/) 查看文档。
 
 ### 构建网站
 
@@ -73,7 +74,7 @@ npm run docs:dev
 npm run docs:build
 ```
 
-构建后的文件将生成在 `docs/.vuepress/dist` 目录下，可以部署到任何静态网站托管服务。
+构建后的文件将生成在 `docs/.vitepress/dist` 目录下，可以部署到任何静态网站托管服务。
 
 ## 🤝 贡献指南
 

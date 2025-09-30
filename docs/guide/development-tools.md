@@ -1,103 +1,36 @@
 # 🛠️ 开发工具与效率
 
-## 📋 概述
+# 开发工具与效率
 
-高效的开发工具和流程是提升软件开发效率和质量的关键。本章节将介绍Java开发中常用的开发工具、最佳实践和效率提升方法，帮助开发团队构建高效、协作的开发环境。
+为了提供更好的阅读体验，开发工具与效率相关内容已迁移到独立目录中。请访问以下链接查看详细内容：
 
-## 💻 IDE工具
+- [开发工具与效率概述](development-tools/)
+- [IntelliJ IDEA 详细指南](development-tools/idea.md)
+- [Sublime Text 详细指南](development-tools/sublime.md)
+- [Trae 详细指南](development-tools/trae.md)
+- [Visual Studio Code 详细指南](development-tools/vscode.md)
 
-### IntelliJ IDEA
+## 为什么开发工具很重要
 
-IntelliJ IDEA是Java开发中最流行的集成开发环境（IDE）之一，由JetBrains开发。它提供了丰富的功能和插件生态系统，极大地提升了Java开发的效率。
+选择合适的开发工具可以：
 
-#### 核心功能
+- 提高代码质量和一致性
+- 减少重复工作，提高开发效率
+- 简化项目管理和构建流程
+- 增强团队协作能力
+- 提供更好的调试和测试环境
 
-- **智能代码补全**：根据上下文提供精确的代码补全建议
-- **代码分析**：实时检测代码错误和潜在问题
-- **重构工具**：提供丰富的代码重构功能，如重命名、提取方法、移动类等
-- **调试工具**：强大的调试器，支持断点、变量观察、表达式求值等
-- **版本控制集成**：内置Git、SVN等版本控制系统的集成
-- **构建工具集成**：支持Maven、Gradle等构建工具
-- **测试工具集成**：内置JUnit、TestNG等测试框架的支持
+## 开发工具分类
 
-#### 常用快捷键
+本部分涵盖以下几类开发工具：
 
-| 快捷键 | 功能描述 |
-|--------|---------|
-| Ctrl + Space | 基本代码补全 |
-| Ctrl + Shift + Space | 智能代码补全 |
-| Ctrl + Alt + L | 格式化代码 |
-| Ctrl + R | 替换文本 |
-| Ctrl + Shift + F | 全局搜索 |
-| Ctrl + Shift + R | 全局替换 |
-| F2 | 跳转到下一个错误 |
-| Ctrl + Alt + M | 提取方法 |
-| Ctrl + Alt + V | 提取变量 |
-| Alt + Enter | 显示意图操作和快速修复 |
+1. **IDE与编辑器**：如IntelliJ IDEA、Sublime Text、Trae和VSCode
+2. **构建工具**：如Maven、Gradle
+3. **版本控制工具**：如Git、SVN
+4. **持续集成/持续部署工具**：如Jenkins、GitHub Actions
+5. **代码质量工具**：如SonarQube、Checkstyle、PMD
 
-#### 推荐插件
-
-- **Lombok**：减少样板代码，如getter、setter、构造函数等
-- **SonarLint**：实时代码质量分析
-- **GitToolBox**：增强Git集成功能
-- **Rainbow Brackets**：为括号添加不同颜色，提高代码可读性
-- **Key Promoter X**：提示未使用的快捷键，帮助学习快捷键
-- **Material Theme UI**：美化IDE界面
-
-### Eclipse
-
-Eclipse是另一个流行的开源Java IDE，由Eclipse基金会维护。它具有强大的插件系统和广泛的社区支持。
-
-#### 核心功能
-
-- **工作空间管理**：组织多个项目的工作环境
-- **插件架构**：通过插件扩展IDE功能
-- **代码编辑器**：支持语法高亮、代码折叠等功能
-- **调试器**：提供完整的调试功能
-- **构建系统**：支持Ant、Maven、Gradle等构建工具
-- **团队协作工具**：支持版本控制和团队协作
-
-### Visual Studio Code
-
-Visual Studio Code（VS Code）是微软开发的轻量级代码编辑器，通过安装插件可以支持Java开发。它具有启动速度快、占用资源少的特点。
-
-#### 推荐Java相关插件
-
-- **Extension Pack for Java**：提供Java开发的核心功能
-- **Spring Boot Extension Pack**：Spring Boot开发的增强功能
-- **Maven for Java**：Maven构建工具的支持
-- **Gradle for Java**：Gradle构建工具的支持
-- **Debugger for Java**：Java调试功能
-- **Test Runner for Java**：Java测试运行功能
-
-## 🔧 构建工具
-
-### Maven
-
-Maven是一个基于项目对象模型（POM）的Java项目管理和构建工具。它可以帮助开发者管理依赖、构建、测试和部署项目。
-
-#### 核心概念
-
-- **POM（Project Object Model）**：Maven项目的基本配置单元，定义了项目的结构、依赖和构建过程
-- **坐标**：唯一标识一个项目的三个属性：groupId、artifactId和version
-- **依赖管理**：自动下载和管理项目依赖的库
-- **仓库**：存储依赖库和构建产物的地方，分为本地仓库和远程仓库
-- **生命周期**：定义了一系列构建阶段，如compile、test、package、install、deploy等
-- **插件和目标**：Maven通过插件提供具体的构建功能，插件包含多个目标
-
-#### 常用命令
-
-```bash
-# 编译项目
-mvn compile
-
-# 运行单元测试
-mvn test
-
-# 打包项目
-mvn package
-
-# 安装项目到本地仓库
+请通过上面的链接查看详细内容。
 mvn install
 
 # 部署项目到远程仓库

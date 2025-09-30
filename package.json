@@ -1,26 +1,33 @@
 {
   "name": "technical_graph",
   "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
-  "description": "",
+  "description": "技术图谱文档，涵盖Java核心、分布式系统、微服务、容器化、开发工具等技术知识",
+  "type": "module",
   "scripts": {
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs",
-    "docs:deploy": "bash deploy-to-code-generator.sh",
-    "docs:deploy:verbose": "bash deploy-to-code-generator.sh -v",
-    "docs:deploy:clean": "bash deploy-to-code-generator.sh -c",
-    "docs:deploy:win": "deploy-to-code-generator.sh",
-    "docs:deploy:verbose:win": "deploy-to-code-generator.sh -v",
-    "docs:deploy:clean:win": "deploy-to-code-generator.sh -c",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs",
+    "docs:deploy": "bash deploy-to-github-pages.sh",
+    "docs:deploy:verbose": "bash deploy-to-github-pages.sh -v",
+    "docs:deploy:clean": "bash deploy-to-github-pages.sh -c",
+    "docs:deploy:win": "deploy-to-github-pages.sh",
+    "docs:deploy:verbose:win": "deploy-to-github-pages.sh -v",
+    "docs:deploy:clean:win": "deploy-to-github-pages.sh -c",
+    "test": "echo \"Running checks for documentation...\" && npm run docs:build"
   },
- "resolutions": {
-    "chokidar": "3.5.3",
-    "fsevents": "2.3.2"
-  },
-  "author": "",
+  "author": "Technical Documentation Team",
+  "license": "MIT",
+  "keywords": [
+    "technical-documentation",
+    "java",
+    "microservices",
+    "distributed-systems",
+    "vitepress"
+  ],
   "devDependencies": {
-    "vuepress": "^1.9.10"
+    "vitepress": "^1.6.4"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   }
 }
