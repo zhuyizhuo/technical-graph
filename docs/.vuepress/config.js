@@ -93,6 +93,11 @@ module.exports = {
               children: ["framework-and-middleware/mysql"]
             },
             {
+              title: "MySQL 集群",
+              collapsable: true,
+              children: ["framework-and-middleware/mysql-cluster"]
+            },
+            {
               title: "RabbitMQ",
               collapsable: true,
               children: ["framework-and-middleware/rabbitmq"]
@@ -131,6 +136,11 @@ module.exports = {
               title: "LDAP",
               collapsable: true,
               children: ["framework-and-middleware/ldap"]
+            },
+            {
+              title: "邮件协议(POP3/SMTP/IMAP)",
+              collapsable: true,
+              children: ["framework-and-middleware/email-protocols"]
             }
           ]
         },
