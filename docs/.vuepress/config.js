@@ -266,11 +266,18 @@ module.exports = {
             }
           ]
         },
-        // {
-        //   title: "性能工程",
-        //   collapsable: false,
-        //   children: ["performance"]
-        // },
+        {
+          title: "性能工程",
+          collapsable: false,
+          children: [
+            "performance",
+            {
+              title: "APM 工具",
+              collapsable: true,
+              children: ["performance/apm-tools"]
+            }
+          ]
+        },
         // {
         //   title: "工程实践",
         //   collapsable: false,
