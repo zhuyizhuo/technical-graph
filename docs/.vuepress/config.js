@@ -199,7 +199,7 @@ module.exports = {
             {
               title: "分布式缓存",
               collapsable: true,
-              children: ["distributed-system/distributed-cache"]
+              children: ["distributed-system/distributed-cache", "distributed-system/memcached-qa"]
             },
             {
               title: "分布式服务治理",
