@@ -78,6 +78,26 @@ module.exports = {
               children: ["framework-and-middleware/mongodb"]
             },
             {
+              title: "SQLite",
+              collapsable: true,
+              children: ["framework-and-middleware/sqlite"]
+            },
+            {
+              title: "H2",
+              collapsable: true,
+              children: ["framework-and-middleware/h2"]
+            },
+            {
+              title: "Jenkins",
+              collapsable: true,
+              children: ["framework-and-middleware/jenkins"]
+            },
+            {
+              title: "PostgreSQL",
+              collapsable: true,
+              children: ["framework-and-middleware/postgresql"]
+            },
+            {
               title: "MyBatis",
               collapsable: true,
               children: ["framework-and-middleware/mybatis"]
