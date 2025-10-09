@@ -26,6 +26,35 @@
 ### 构建工具
 
 - **Maven**：基于项目对象模型的Java项目管理和构建工具
+  Maven常用命令：
+  ```bash
+  # 编译项目
+  mvn compile
+  
+  # 运行单元测试
+  mvn test
+  
+  # 打包项目
+  mvn package
+  
+  # 安装到本地仓库
+  mvn install
+  
+  # 部署项目到远程仓库
+  mvn deploy
+  
+  # 清理构建产物
+  mvn clean
+  
+  # 生成项目站点文档
+  mvn site
+  
+  # 跳过测试执行打包
+  mvn package -DskipTests
+  
+  # 更新SNAPSHOT依赖
+  mvn -U package
+  ```
 - **Gradle**：基于Groovy的构建自动化工具，提供了更灵活的构建脚本
 
 ### 版本控制工具

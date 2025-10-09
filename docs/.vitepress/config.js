@@ -5,7 +5,8 @@ export default defineConfig({
   description: '从底层原理到上层应用，构建完整的Java技术栈知识体系',
   base: '/technical-graph-doc/',
   head: [
-    ['link', { rel: 'icon', href: '/favicon.ico' }]
+    ['link', { rel: 'icon', href: '/technical-graph-doc/public/favicon.ico' }],
+    ['link', { rel: 'shortcut icon', href: '/technical-graph-doc/public/favicon.ico' }]
   ],
   ignoreDeadLinks: true,
   themeConfig: {
@@ -62,79 +63,79 @@ export default defineConfig({
           collapsed: false,
           items: [
             {
-              text: "Dubbo",
+              text: "数据库",
               collapsed: true,
-              items: [{ text: 'Dubbo 基础', link: '/guide/framework-and-middleware/dubbo.md' }]
+              items: [
+                {
+                  text: "MySQL",
+                  collapsed: true,
+                  items: [
+                    { text: 'MySQL 基础', link: '/guide/framework-and-middleware/mysql.md' },
+                    { text: 'MySQL集群基础', link: '/guide/framework-and-middleware/mysql-cluster.md' }
+                  ]
+                },
+                { text: 'PostgreSQL基础', link: '/guide/framework-and-middleware/postgresql.md' },
+                { text: 'MongoDB 基础', link: '/guide/framework-and-middleware/mongodb.md' },
+                { text: 'H2数据库基础', link: '/guide/framework-and-middleware/h2.md' },
+                { text: 'SQLite基础', link: '/guide/framework-and-middleware/sqlite.md' }
+              ]
             },
             {
-              text: "Elasticsearch",
-              collapsed: true,
-              items: [{ text: 'Elasticsearch 基础', link: '/guide/framework-and-middleware/elasticsearch.md' }]
-            },
-            {
-              text: "Kafka",
-              collapsed: true,
-              items: [{ text: 'Kafka 基础', link: '/guide/framework-and-middleware/kafka.md' }]
-            },
-            {
-              text: "MongoDB",
-              collapsed: true,
-              items: [{ text: 'MongoDB 基础', link: '/guide/framework-and-middleware/mongodb.md' }]
-            },
-            {
-              text: "MyBatis",
-              collapsed: true,
-              items: [{ text: 'MyBatis 基础', link: '/guide/framework-and-middleware/mybatis.md' }]
-            },
-            {
-              text: "MyCat",
-              collapsed: true,
-              items: [{ text: 'MyCat 基础', link: '/guide/framework-and-middleware/mycat.md' }]
-            },
-            {
-              text: "MySQL",
-              collapsed: true,
-              items: [{ text: 'MySQL 基础', link: '/guide/framework-and-middleware/mysql.md' }]
-            },
-            {
-              text: "RabbitMQ",
-              collapsed: true,
-              items: [{ text: 'RabbitMQ 基础', link: '/guide/framework-and-middleware/rabbitmq.md' }]
-            },
-            {
-              text: "Redis",
+              text: "缓存系统",
               collapsed: true,
               items: [{ text: 'Redis 基础', link: '/guide/framework-and-middleware/redis.md' }]
             },
             {
-              text: "RocketMQ",
+              text: "消息队列",
               collapsed: true,
-              items: [{ text: 'RocketMQ 基础', link: '/guide/framework-and-middleware/rocketmq.md' }]
+              items: [
+                { text: 'Kafka 基础', link: '/guide/framework-and-middleware/kafka.md' },
+                { text: 'RabbitMQ 基础', link: '/guide/framework-and-middleware/rabbitmq.md' },
+                { text: 'RocketMQ 基础', link: '/guide/framework-and-middleware/rocketmq.md' }
+              ]
             },
             {
-              text: "ShardingSphere",
+              text: "ORM框架",
               collapsed: true,
-              items: [{ text: 'ShardingSphere 基础', link: '/guide/framework-and-middleware/shardingsphere.md' }]
+              items: [{ text: 'MyBatis 基础', link: '/guide/framework-and-middleware/mybatis.md' }]
             },
             {
-              text: "Spring Boot",
+              text: "分布式服务框架",
               collapsed: true,
-              items: [{ text: 'Spring Boot 基础', link: '/guide/framework-and-middleware/springboot.md' }]
+              items: [
+                { text: 'Dubbo 基础', link: '/guide/framework-and-middleware/dubbo.md' },
+                { text: 'Spring Cloud 基础', link: '/guide/framework-and-middleware/spring-cloud.md' }
+              ]
             },
             {
-              text: "Spring Cloud",
+              text: "Spring生态",
               collapsed: true,
-              items: [{ text: 'Spring Cloud 基础', link: '/guide/framework-and-middleware/spring-cloud.md' }]
+              items: [
+                { text: 'Spring Boot 基础', link: '/guide/framework-and-middleware/springboot.md' },
+                { text: 'Spring Data 基础', link: '/guide/framework-and-middleware/spring-data.md' }
+              ]
             },
             {
-              text: "Spring Data",
+              text: "数据分片中间件",
               collapsed: true,
-              items: [{ text: 'Spring Data 基础', link: '/guide/framework-and-middleware/spring-data.md' }]
+              items: [
+                { text: 'ShardingSphere 基础', link: '/guide/framework-and-middleware/shardingsphere.md' },
+                { text: 'MyCat 基础', link: '/guide/framework-and-middleware/mycat.md' }
+              ]
             },
             {
-              text: "LDAP",
+              text: "搜索相关",
               collapsed: true,
-              items: [{ text: 'LDAP 基础', link: '/guide/framework-and-middleware/ldap.md' }]
+              items: [{ text: 'Elasticsearch 基础', link: '/guide/framework-and-middleware/elasticsearch.md' }]
+            },
+            {
+              text: "其他工具",
+              collapsed: true,
+              items: [
+                { text: 'LDAP 基础', link: '/guide/framework-and-middleware/ldap.md' },
+                { text: '邮件协议基础', link: '/guide/framework-and-middleware/email-protocols.md' },
+                { text: 'Jenkins基础', link: '/guide/framework-and-middleware/jenkins.md' }
+              ]
             }
           ]
         },
@@ -202,6 +203,11 @@ export default defineConfig({
               text: "分布式调度",
               collapsed: true,
               items: [{ text: '分布式调度 基础', link: '/guide/distributed-system/distributed-scheduling.md' }]
+            },
+            {
+              text: "分布式缓存问答",
+              collapsed: true,
+              items: [{ text: 'Memcached 问答', link: '/guide/distributed-system/memcached-qa.md' }]
             }
           ]
         },
@@ -259,6 +265,22 @@ export default defineConfig({
                 { text: '设计模式概述', link: '/guide/architecture-design/design-patterns/' }
               ]
             }
+          ]
+        },
+        {
+          text: "微服务与API设计",
+          collapsed: false,
+          items: [
+            { text: 'API设计', link: '/guide/microservices-and-api-design/api-design.md' },
+            { text: '微服务架构', link: '/guide/microservices-and-api-design/microservices-architecture.md' },
+            { text: 'Postman指南', link: '/guide/microservices-and-api-design/postman-guide.md' }
+          ]
+        },
+        {
+          text: "性能优化",
+          collapsed: false,
+          items: [
+            { text: 'APM工具', link: '/guide/performance/apm-tools.md' }
           ]
         }
       ]

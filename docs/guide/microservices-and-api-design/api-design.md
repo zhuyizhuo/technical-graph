@@ -3067,6 +3067,20 @@ public class ProductServiceTest {
 **示例（Spring Boot Test）**：
 
 ```java
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.time.LocalDateTime;
+import java.util.List;
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 public class ProductControllerIT {
@@ -3098,4 +3112,160 @@ public class ProductControllerIT {
     @Test
     public void shouldGetAllProducts() throws Exception {
         // 执行请求
-        mockMvc.perform(get("/api
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/products")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.length()").value(1))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].name").value("Smartphone"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].price").value(599.99));
+    }
+    
+    @Test
+    public void shouldGetProductById() throws Exception {
+        // 获取已存在的产品ID
+        Product existingProduct = productRepository.findAll().get(0);
+        Long productId = existingProduct.getId();
+        
+        // 执行请求
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/products/{id}", productId)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(productId))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Smartphone"));
+    }
+    
+    @Test
+    public void shouldCreateProduct() throws Exception {
+        // 准备请求数据
+        CreateProductRequest request = new CreateProductRequest();
+        request.setName("Laptop");
+        request.setDescription("Gaming laptop");
+        request.setPrice(1299.99);
+        request.setCategory("electronics");
+        
+        // 执行请求
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/products")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(request)))
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").exists())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Laptop"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.price").value(1299.99));
+        
+        // 验证数据库中是否新增了产品
+        List<Product> products = productRepository.findAll();
+        assertEquals(2, products.size());
+    }
+    
+    @Test
+    public void shouldUpdateProduct() throws Exception {
+        // 获取已存在的产品ID
+        Product existingProduct = productRepository.findAll().get(0);
+        Long productId = existingProduct.getId();
+        
+        // 准备请求数据
+        UpdateProductRequest request = new UpdateProductRequest();
+        request.setName("Updated Smartphone");
+        request.setPrice(649.99);
+        
+        // 执行请求
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/products/{id}", productId)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(request)))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(productId))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Updated Smartphone"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.price").value(649.99));
+    }
+    
+    @Test
+    public void shouldDeleteProduct() throws Exception {
+        // 获取已存在的产品ID
+        Product existingProduct = productRepository.findAll().get(0);
+        Long productId = existingProduct.getId();
+        
+        // 执行请求
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/products/{id}", productId)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isNoContent());
+        
+        // 验证数据库中是否删除了产品
+        List<Product> products = productRepository.findAll();
+        assertEquals(0, products.size());
+        
+        // 验证删除后再查询会返回404
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/products/{id}", productId)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
+    
+    @Test
+    public void shouldReturnNotFoundWhenProductDoesNotExist() throws Exception {
+        // 使用不存在的产品ID
+        Long nonExistentId = 999L;
+        
+        // 执行请求
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/products/{id}", nonExistentId)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
+}
+```
+
+#### 5.2.3 契约测试
+
+契约测试用于确保API提供者和消费者之间的契约一致性。
+
+**示例（Spring Cloud Contract）**：
+
+```groovy
+// 生产者契约定义
+Contract.make {
+    description "should return product by id"
+    request {
+        method GET()
+        urlPath("/api/products/1") {
+            queryParameters {
+            }
+        }
+        headers {
+            contentType(applicationJson())
+        }
+    }
+    response {
+        status 200
+        headers {
+            contentType(applicationJson())
+        }
+        body("""
+            {
+                "id": 1,
+                "name": "Smartphone",
+                "description": "Latest model smartphone",
+                "price": 599.99,
+                "category": "electronics",
+                "createdAt": $(regex("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\.\\d{3}Z")),
+                "updatedAt": $(regex("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\.\\d{3}Z"))
+            }
+        """)
+    }
+}
+```
+
+#### 5.2.4 API自动化测试工具
+
+除了代码级别的测试外，还可以使用专业的API自动化测试工具进行测试：
+
+- **Postman**：功能强大的API开发和测试平台，支持创建自动化测试集合
+- **SoapUI**：专业的API测试工具，支持REST和SOAP API测试
+- **RestAssured**：Java的REST API测试框架，提供流畅的API进行测试
+- **Karate**：基于Cucumber的API测试框架，支持BDD风格的测试
+- **Insomnia**：轻量级的API测试工具，界面简洁易用
+
+## 六、总结
+
+API设计是构建现代软件系统的关键环节，良好的API设计可以提高系统的可维护性、可扩展性和用户体验。本文介绍了API设计的核心原则、RESTful API设计、GraphQL API设计、API网关设计、API文档与测试等方面的内容，希望能够帮助开发者设计高质量的API。
+
+API设计是一个持续演进的过程，随着业务需求的变化和技术的发展，API也需要不断优化和更新。在API设计和演进过程中，应始终遵循API设计的核心原则，保持API的一致性、可用性和安全性，同时注重API的文档化和测试，确保API的质量和稳定性。
+
+通过合理的API设计，可以构建出更加灵活、可靠和高效的软件系统，为用户提供更好的服务和体验。

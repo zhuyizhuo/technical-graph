@@ -1949,6 +1949,7 @@ public class EncryptedStringConverter implements AttributeConverter<String, Stri
         return encryptionService.decrypt(dbData);
     }
 }
+```
 
 ## 七、微服务实施最佳实践
 
