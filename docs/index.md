@@ -10,37 +10,37 @@ description: 构建完整的Java技术栈知识体系
   <div class="card">
     <h3>Java Core</h3>
     <p>语言基础、集合框架、并发编程、JVM原理</p>
-    <a href="/guide/java-core/" class="card-link">深入学习</a>
+    <a href="./guide/java-core/core" class="card-link">深入学习</a>
   </div>
   
   <div class="card">
     <h3>Spring Ecosystem</h3>
     <p>Spring Boot、Spring Cloud、Spring MVC</p>
-    <a href="/guide/framework-and-middleware/spring/" class="card-link">深入学习</a>
+    <a href="./guide/framework-and-middleware/springboot" class="card-link">深入学习</a>
   </div>
   
   <div class="card">
     <h3>分布式系统</h3>
     <p>微服务、服务治理、消息队列、分布式事务</p>
-    <a href="/guide/distributed-system/" class="card-link">深入学习</a>
+    <a href="./guide/distributed-system/distributed-cache" class="card-link">深入学习</a>
   </div>
   
   <div class="card">
     <h3>容器化技术</h3>
     <p>Docker、Kubernetes、云原生应用开发</p>
-    <a href="/guide/containerization-and-cloud-native/" class="card-link">深入学习</a>
+    <a href="./guide/containerization-and-cloud-native/cicd" class="card-link">深入学习</a>
   </div>
   
   <div class="card">
-    <h3>数据存储</h3>
+    <h3>框架与中间件</h3>
     <p>关系型数据库、NoSQL、缓存技术、大数据</p>
-    <a href="/guide/framework-and-middleware/database/" class="card-link">深入学习</a>
+    <a href="./guide/framework-and-middleware/dubbo" class="card-link">深入学习</a>
   </div>
   
   <div class="card">
     <h3>开发工具</h3>
     <p>IDE、构建工具、版本控制、CI/CD</p>
-    <a href="/guide/development-tools/" class="card-link">深入学习</a>
+    <a href="./guide/development-tools/idea" class="card-link">深入学习</a>
   </div>
 </div>
 
@@ -56,7 +56,7 @@ description: 构建完整的Java技术栈知识体系
       <li>集合框架与泛型</li>
       <li>异常处理机制</li>
     </ul>
-    <a href="/guide/java-core/basics/" class="stage-link">开始学习</a>
+    <a href="./guide/java-core/core" class="stage-link">开始学习</a>
   </div>
   
   <div class="path-stage">
@@ -68,7 +68,7 @@ description: 构建完整的Java技术栈知识体系
       <li>Spring Boot开发</li>
       <li>数据库设计与优化</li>
     </ul>
-    <a href="/guide/java-core/concurrent/" class="stage-link">继续学习</a>
+    <a href="./guide/java-core/concurrency-programming/synchronized-lock" class="stage-link">继续学习</a>
   </div>
   
   <div class="path-stage">
@@ -80,7 +80,7 @@ description: 构建完整的Java技术栈知识体系
       <li>性能优化实战</li>
       <li>大型系统设计</li>
     </ul>
-    <a href="/guide/microservices-and-api-design/" class="stage-link">挑战高级</a>
+    <a href="./guide/microservices-and-api-design/api-design" class="stage-link">挑战高级</a>
   </div>
   
   <div class="path-stage">
@@ -92,7 +92,7 @@ description: 构建完整的Java技术栈知识体系
       <li>高可用系统设计</li>
       <li>技术选型与落地</li>
     </ul>
-    <a href="/guide/containerization-and-cloud-native/kubernetes/" class="stage-link">成为专家</a>
+    <a href="./guide/containerization-and-cloud-native/cicd" class="stage-link">成为专家</a>
   </div>
 </div>
 
@@ -102,27 +102,27 @@ description: 构建完整的Java技术栈知识体系
   <div class="update-item">
     <div class="update-icon">🆕</div>
     <div class="update-content">
-      <h4><a href="/guide/development-tools/">开发工具文档新增</a></h4>
+      <h4><a href="./guide/development-tools/idea">开发工具文档新增</a></h4>
       <p>新增IntelliJ IDEA、VSCode等常用开发工具的使用技巧和配置指南</p>
-      <span class="update-date">2024-09-30</span>
+      <span class="update-date">2025-09-30</span>
     </div>
   </div>
   
   <div class="update-item">
     <div class="update-icon">🔒</div>
     <div class="update-content">
-      <h4><a href="/guide/system-security/">系统安全模块重构</a></h4>
+      <h4><a href="./guide/system-security/identity-authentication/jwt">系统安全模块重构</a></h4>
       <p>重构身份认证与授权、网络安全等内容，增强安全性知识体系</p>
-      <span class="update-date">2024-09-25</span>
+      <span class="update-date">2025-09-25</span>
     </div>
   </div>
   
   <div class="update-item">
     <div class="update-icon">☁️</div>
     <div class="update-content">
-      <h4><a href="/guide/containerization-and-cloud-native/">容器化与云原生更新</a></h4>
+      <h4><a href="./guide/containerization-and-cloud-native/cicd">容器化与云原生更新</a></h4>
       <p>更新Kubernetes最新特性和云原生应用最佳实践</p>
-      <span class="update-date">2024-09-20</span>
+      <span class="update-date">2025-09-20</span>
     </div>
   </div>
 </div>
@@ -240,16 +240,20 @@ description: 构建完整的Java技术栈知识体系
 
 .stage-link {
   display: inline-block;
-  background-color: var(--vp-c-brand);
-  color: white;
+  color: var(--vp-c-brand);
   padding: 8px 16px;
   border-radius: 4px;
   text-decoration: none;
   font-weight: 500;
+  border: 1px solid var(--vp-c-brand);
+  transition: all 0.2s ease;
 }
 
 .stage-link:hover {
-  background-color: var(--vp-c-brand-dark);
+  background-color: var(--vp-c-bg-soft);
+  color: var(--vp-c-brand-dark);
+  border-color: var(--vp-c-brand-dark);
+  text-decoration: none;
 }
 
 .recent-updates {
