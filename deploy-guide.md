@@ -1,10 +1,10 @@
 # 技术图谱文档部署指南
 
-本文档详细介绍了如何使用项目提供的部署脚本来构建和部署VuePress文档到GitHub Pages。
+本文档详细介绍了如何使用项目提供的部署脚本来构建和部署VitePress文档到GitHub Pages。
 
 ## 部署脚本概述
 
-项目根目录下的 `deploy-to-code-generator.sh` 脚本是一个增强版部署工具，提供了以下特性：
+项目根目录下的 `deploy-to-github-pages.sh` 脚本是一个增强版部署工具，提供了以下特性：
 
 - 自动检测系统环境（Node.js、npm、git）
 - 支持命令行参数定制部署行为
@@ -16,7 +16,7 @@
 
 在使用部署脚本之前，请确保您的环境中已安装以下软件：
 
-- **Node.js** (推荐 v14.0.0 或更高版本)
+- **Node.js** (推荐 v16.0.0 或更高版本，符合package.json中定义的要求)
 - **npm** (通常随Node.js一起安装)
 - **Git** (需要配置好SSH密钥，能够访问GitHub仓库)
 
@@ -71,21 +71,22 @@ npm run docs:deploy:clean:win
 
 ```bash
 # Mac/Linux
-bash deploy-to-code-generator.sh -v -m "更新技术图谱文档"
+bash deploy-to-github-pages.sh -v -m "更新技术图谱文档"
 
 # Windows
-ddeploy-to-code-generator.sh -v -m "更新技术图谱文档"
+deploy-to-github-pages.sh -v -m "更新技术图谱文档"
 ```
 
 ## 部署流程详解
 
 当执行部署脚本时，它会按照以下步骤进行操作：
 
-1. **环境检查**：验证Node.js、npm和git是否已正确安装
-2. **依赖安装**：执行 `npm install` 确保项目依赖完整
-3. **文档构建**：执行 `npm run docs:build` 构建VuePress文档
-4. **Git配置**：初始化git仓库（如果需要），设置用户信息
-5. **提交推送**：将构建好的文档提交并推送到指定的GitHub仓库和分支
+1. **环境检查**：验证Node.js、npm和git是否已正确安装，并检查版本兼容性
+2. **依赖安装**：执行 `npm install` 确保项目依赖完整，特别是VitePress相关依赖
+3. **文档构建**：执行 `npm run docs:build` 构建VitePress文档，生成静态文件
+4. **准备部署目录**：进入构建目录，初始化git仓库（如果需要），设置用户信息
+5. **配置远程仓库**：添加GitHub Pages仓库作为远程仓库
+6. **提交推送**：将构建好的文档提交并推送到指定的GitHub仓库和分支
 
 ## 常见问题排查
 
@@ -95,7 +96,7 @@ ddeploy-to-code-generator.sh -v -m "更新技术图谱文档"
 
 1. 在Mac/Linux上，为脚本添加执行权限：
    ```bash
-   chmod +x deploy-to-code-generator.sh
+   chmod +x deploy-to-github-pages.sh
    ```
 
 2. 如果遇到文件所有者问题，脚本会尝试自动修复权限，但如果失败，您可能需要手动修复：
@@ -125,19 +126,59 @@ ddeploy-to-code-generator.sh -v -m "更新技术图谱文档"
 
 ```bash
 # 在脚本中修改以下默认值
-DEFAULT_REPO="git@github.com:zhuyizhuo/technical-graph-doc.git"
-DEFAULT_BRANCH="gh-pages"
+REPO_URL="git@github.com:zhuyizhuo/technical-graph-doc.git"
+BRANCH="gh-pages"
 ```
 
 ## 自动化部署建议
 
 为了简化部署流程，建议在项目的GitHub Actions中配置自动化部署，这样每次代码提交到主分支时，文档会自动重新部署。
 
+### GitHub Actions配置示例
+
+在项目根目录下创建 `.github/workflows/deploy-docs.yml` 文件，内容如下：
+
+```yaml
+name: Deploy Documentation
+
+on:
+  push:
+    branches:
+      - main  # 或 master，根据您的主分支名称调整
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Install dependencies
+        run: npm install
+      - name: Build documentation
+        run: npm run docs:build
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/.vitepress/dist
+          publish_branch: gh-pages
+```
+
+这个配置会在每次向main分支推送代码时，自动构建文档并部署到GitHub Pages。
+
 ## 联系我们
 
-如果您在使用部署脚本时遇到任何问题，请在项目仓库中提交Issue或联系技术图谱团队。
+如果您在使用部署脚本时遇到任何问题，请通过以下方式获取帮助：
+
+- 在[项目GitHub仓库](https://github.com/zhuyizhuo/technical-graph)中提交Issue
+- 联系技术图谱团队：zhuyizhuo2019@gmail.com
 
 ---
 
-**更新时间：** $(date '+%Y-%m-%d')
+**更新时间：** 2025-10-10
 **技术图谱团队**
