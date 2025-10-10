@@ -15,7 +15,8 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '20'  # 使用更新的Node.js版本，更好地兼容VitePress v1.6.4
+          cache: 'npm'
       - name: Install dependencies
         run: npm install
       - name: Build documentation
