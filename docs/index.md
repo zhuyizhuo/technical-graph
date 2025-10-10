@@ -1,7 +1,5 @@
 ---
-home: true
-title: 技术图谱
-description: 构建完整的Java技术栈知识体系
+layout: home
 ---
 
 # 核心技术栈

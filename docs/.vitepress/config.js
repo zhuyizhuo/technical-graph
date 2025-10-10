@@ -290,6 +290,10 @@ export default defineConfig({
         icon: 'github',
         link: 'https://github.com/zhuyizhuo/technical-graph'
       }
-    ]
+    ],
+    footer: {
+      message: '基于 MIT 许可发布',
+      copyright: '版权所有 © 2025 yizhuo'
+    }
   }
 })
