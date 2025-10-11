@@ -18,7 +18,7 @@ jobs:
           node-version: '20'  # 使用更新的Node.js版本，更好地兼容VitePress v1.6.4
           cache: 'npm'
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
       - name: Build documentation
         run: npm run docs:build
       - name: Deploy to GitHub Pages
