@@ -1,6 +1,20 @@
 import { defineConfig } from 'vitepress'
 
+import { SearchPlugin } from 'vitepress-plugin-search'
+
 export default defineConfig({
+  // 添加搜索插件配置
+  plugins: [
+    SearchPlugin({
+      placeholder: '搜索文档',
+      buttonLabel: '搜索',
+      cancelButtonLabel: '取消',
+      noData: '没有找到结果',
+      include: '**/*.md',
+      depth: 6
+    })
+  ],
+  
   title: '技术图谱',
   description: '从底层原理到上层应用，构建完整的Java技术栈知识体系',
   base: '/technical-graph-doc/',
@@ -10,6 +24,13 @@ export default defineConfig({
   ],
   ignoreDeadLinks: true,
   themeConfig: {
+    // 添加搜索配置
+    search: {
+      provider: 'local',
+      placeholder: '搜索文档',
+      buttonLabel: '搜索',
+      noData: '没有找到结果'
+    },
     logo: '/technical-graph-doc.jpg',
     nav: [
       { text: '首页', link: '/' },
@@ -36,7 +57,10 @@ export default defineConfig({
             {
               text: "JVM",
               collapsed: true,
-              items: [{ text: 'JVM 基础', link: '/guide/java-core/jvm.md' }]
+              items: [
+                { text: 'JVM 基础', link: '/guide/java-core/jvm.md' },
+                { text: 'JVM 内存优化', link: '/guide/java-core/jvm-memory-optimization.md' }
+              ]
             },
             {
               text: "并发编程",

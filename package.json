@@ -25,7 +25,9 @@
     "vitepress"
   ],
   "devDependencies": {
-    "vitepress": "^1.6.4"
+    "flexsearch": "^0.8.212",
+    "vitepress": "^1.6.4",
+    "vitepress-plugin-search": "^1.0.4-alpha.22"
   },
   "engines": {
     "node": ">=16.0.0"
