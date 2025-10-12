@@ -1,7 +1,7 @@
 # 技术图谱 - Java工程师的进阶之路
 
 <div align="center">
-  <img src="docs/.vuepress/public/technical-graph-doc.jpg" alt="技术图谱" width="400"/>
+  <img src="docs/public/technical-graph-doc.jpg" alt="技术图谱" width="400"/>
   <p>从底层原理到上层应用，构建完整的Java技术栈知识体系</p>
 </div>
 
