@@ -250,7 +250,9 @@ export default defineConfig({
             { text: 'IntelliJ IDEA', link: '/guide/development-tools/idea.md' },
             { text: 'Sublime Text', link: '/guide/development-tools/sublime.md' },
             { text: 'Trae', link: '/guide/development-tools/trae.md' },
-            { text: 'Visual Studio Code', link: '/guide/development-tools/vscode.md' }
+            { text: 'Visual Studio Code', link: '/guide/development-tools/vscode.md' },
+            { text: 'Gradle', link: '/guide/development-tools/gradle.md' },
+            { text: 'Maven', link: '/guide/development-tools/maven.md' }
           ]
         },
         {

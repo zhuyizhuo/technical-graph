@@ -98,29 +98,29 @@ layout: home
 
 <div class="recent-updates">
   <div class="update-item">
+    <div class="update-icon">📦</div>
+    <div class="update-content">
+      <h4><a href="./guide/development-tools/maven">构建工具文档新增 - Maven</a></h4>
+      <p>新增Maven详细使用指南，包括安装配置、核心概念、POM详解、多模块项目等内容</p>
+      <span class="update-date">2025-10-16</span>
+    </div>
+  </div>
+  
+  <div class="update-item">
+    <div class="update-icon">⚙️</div>
+    <div class="update-content">
+      <h4><a href="./guide/development-tools/gradle">构建工具文档新增 - Gradle</a></h4>
+      <p>新增Gradle详细使用指南，包括核心概念、常用插件、任务编写、实战示例等内容</p>
+      <span class="update-date">2025-10-16</span>
+    </div>
+  </div>
+  
+  <div class="update-item">
     <div class="update-icon">🆕</div>
     <div class="update-content">
       <h4><a href="./guide/development-tools/idea">开发工具文档新增</a></h4>
       <p>新增IntelliJ IDEA、VSCode等常用开发工具的使用技巧和配置指南</p>
-      <span class="update-date">2025-09-30</span>
-    </div>
-  </div>
-  
-  <div class="update-item">
-    <div class="update-icon">🔒</div>
-    <div class="update-content">
-      <h4><a href="./guide/system-security/identity-authentication/jwt">系统安全模块重构</a></h4>
-      <p>重构身份认证与授权、网络安全等内容，增强安全性知识体系</p>
       <span class="update-date">2025-09-25</span>
-    </div>
-  </div>
-  
-  <div class="update-item">
-    <div class="update-icon">☁️</div>
-    <div class="update-content">
-      <h4><a href="./guide/containerization-and-cloud-native/cicd">容器化与云原生更新</a></h4>
-      <p>更新Kubernetes最新特性和云原生应用最佳实践</p>
-      <span class="update-date">2025-09-20</span>
     </div>
   </div>
 </div>

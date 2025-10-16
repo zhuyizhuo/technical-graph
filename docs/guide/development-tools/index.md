@@ -25,7 +25,7 @@
 
 ### 构建工具
 
-- **Maven**：基于项目对象模型的Java项目管理和构建工具
+- **[Maven](maven.md)**：基于项目对象模型的Java项目管理和构建工具
   Maven常用命令：
   ```bash
   # 编译项目
@@ -55,7 +55,7 @@
   # 更新SNAPSHOT依赖
   mvn -U package
   ```
-- **Gradle**：基于Groovy的构建自动化工具，提供了更灵活的构建脚本
+- **[Gradle](gradle.md)**：基于Groovy的构建自动化工具，提供了更灵活的构建脚本
 
 ### 版本控制工具
 
