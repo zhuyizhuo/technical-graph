@@ -98,29 +98,29 @@ layout: home
 
 <div class="recent-updates">
   <div class="update-item">
+    <div class="update-icon">🌱</div>
+    <div class="update-content">
+      <h4><a href="./guide/framework-and-middleware/spring.md">Spring框架文档新增</a></h4>
+      <p>新增Spring框架详细文档，全面讲解Bean生命周期、常用扩展点及使用场景，包括IoC容器原理、AOP实现方式、事务管理等核心内容</p>
+      <span class="update-date">2024-06-01</span>
+    </div>
+  </div>
+  
+  <div class="update-item">
+    <div class="update-icon">🔌</div>
+    <div class="update-content">
+      <h4><a href="./guide/framework-and-middleware/jndi.md">JNDI文档新增</a></h4>
+      <p>新增JNDI详细文档，涵盖JNDI核心概念、API详解、使用方法、Spring应用集成以及安全考虑等内容，帮助开发者理解和应用命名和目录服务</p>
+      <span class="update-date">2024-06-01</span>
+    </div>
+  </div>
+  
+  <div class="update-item">
     <div class="update-icon">📦</div>
     <div class="update-content">
       <h4><a href="./guide/development-tools/maven">构建工具文档新增 - Maven</a></h4>
-      <p>新增Maven详细使用指南，包括安装配置、核心概念、POM详解、多模块项目等内容</p>
-      <span class="update-date">2025-10-16</span>
-    </div>
-  </div>
-  
-  <div class="update-item">
-    <div class="update-icon">⚙️</div>
-    <div class="update-content">
-      <h4><a href="./guide/development-tools/gradle">构建工具文档新增 - Gradle</a></h4>
-      <p>新增Gradle详细使用指南，包括核心概念、常用插件、任务编写、实战示例等内容</p>
-      <span class="update-date">2025-10-16</span>
-    </div>
-  </div>
-  
-  <div class="update-item">
-    <div class="update-icon">🆕</div>
-    <div class="update-content">
-      <h4><a href="./guide/development-tools/idea">开发工具文档新增</a></h4>
-      <p>新增IntelliJ IDEA、VSCode等常用开发工具的使用技巧和配置指南</p>
-      <span class="update-date">2025-09-25</span>
+      <p>新增Maven详细文档，涵盖Maven核心概念、安装配置、POM详解、依赖管理、构建生命周期等内容，帮助开发者更全面地理解和使用Maven构建工具</p>
+      <span class="update-date">2024-05-31</span>
     </div>
   </div>
 </div>
