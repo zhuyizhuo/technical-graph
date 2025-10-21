@@ -136,7 +136,8 @@ export default defineConfig({
               items: [
                 { text: 'Spring 基础', link: '/guide/framework-and-middleware/spring.md' },
                 { text: 'Spring Boot 基础', link: '/guide/framework-and-middleware/springboot.md' },
-                { text: 'Spring Data 基础', link: '/guide/framework-and-middleware/spring-data.md' }
+                { text: 'Spring Data 基础', link: '/guide/framework-and-middleware/spring-data.md' },
+                { text: 'Spring Security 基础', link: '/guide/framework-and-middleware/spring-security.md' }
               ]
             },
             {
@@ -159,6 +160,8 @@ export default defineConfig({
                 { text: 'LDAP 基础', link: '/guide/framework-and-middleware/ldap.md' },
                 { text: '邮件协议基础', link: '/guide/framework-and-middleware/email-protocols.md' },
                 { text: 'JNDI 基础', link: '/guide/framework-and-middleware/jndi.md' },
+                { text: 'Shiro 基础', link: '/guide/framework-and-middleware/shiro.md' },
+                { text: 'Quartz 基础', link: '/guide/framework-and-middleware/quartz.md' },
                 { text: 'Jenkins基础', link: '/guide/framework-and-middleware/jenkins.md' }
               ]
             }

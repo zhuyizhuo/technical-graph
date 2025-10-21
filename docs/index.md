@@ -98,6 +98,33 @@ layout: home
 
 <div class="recent-updates">
   <div class="update-item">
+    <div class="update-icon">🛡️</div>
+    <div class="update-content">
+      <h4><a href="./guide/framework-and-middleware/spring-security.md">Spring Security安全框架文档新增</a></h4>
+      <p>新增Spring Security详细文档，全面讲解认证授权机制、安全过滤器链、CSRF保护、方法级安全控制、OAuth2支持等内容，帮助开发者构建安全可靠的应用程序</p>
+      <span class="update-date">2024-06-02</span>
+    </div>
+  </div>
+  
+  <div class="update-item">
+    <div class="update-icon">🔐</div>
+    <div class="update-content">
+      <h4><a href="./guide/framework-and-middleware/shiro.md">Shiro安全框架文档新增</a></h4>
+      <p>新增Shiro详细文档，涵盖认证授权、会话管理、加密、与Spring/Spring Boot集成等内容，提供简单而强大的安全解决方案</p>
+      <span class="update-date">2024-06-02</span>
+    </div>
+  </div>
+  
+  <div class="update-item">
+    <div class="update-icon">⏰</div>
+    <div class="update-content">
+      <h4><a href="./guide/framework-and-middleware/quartz.md">Quartz任务调度框架文档新增</a></h4>
+      <p>新增Quartz详细文档，涵盖任务调度、Cron表达式、持久化存储、集群配置、与Spring集成等内容，帮助开发者实现复杂的定时任务需求</p>
+      <span class="update-date">2024-06-02</span>
+    </div>
+  </div>
+  
+  <div class="update-item">
     <div class="update-icon">🌱</div>
     <div class="update-content">
       <h4><a href="./guide/framework-and-middleware/spring.md">Spring框架文档新增</a></h4>
