@@ -19,6 +19,9 @@ Java语言是一种广泛应用于企业级应用开发的高级编程语言，�
 ### [JVM](jvm.md)
 深入理解Java虚拟机的工作原理，包括内存模型、类加载机制、垃圾回收算法、JVM调优等内容，帮助您优化Java应用性能。
 
+### [Java 内存模型详解](jvm-memory-model.md)
+详细介绍Java内存模型的核心概念和设计原则，包括原子性、可见性、有序性等关键特性。
+
 ### [并发编程](concurrency-programming/)
 学习Java并发编程的核心概念和实践技巧：
 - [synchronized 锁](concurrency-programming/synchronized-lock.md)：了解Java内置的同步机制

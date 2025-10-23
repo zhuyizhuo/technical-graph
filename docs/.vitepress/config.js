@@ -59,6 +59,7 @@ export default defineConfig({
               collapsed: true,
               items: [
                 { text: 'JVM 基础', link: '/guide/java-core/jvm.md' },
+                { text: 'Java 内存模型详解', link: '/guide/java-core/jvm-memory-model.md' },
                 { text: 'JVM 内存优化', link: '/guide/java-core/jvm-memory-optimization.md' }
               ]
             },
@@ -255,6 +256,7 @@ export default defineConfig({
             { text: 'Sublime Text', link: '/guide/development-tools/sublime.md' },
             { text: 'Trae', link: '/guide/development-tools/trae.md' },
             { text: 'Visual Studio Code', link: '/guide/development-tools/vscode.md' },
+            { text: 'Emmet语法', link: '/guide/development-tools/emmet.md' },
             { text: 'Gradle', link: '/guide/development-tools/gradle.md' },
             { text: 'Maven', link: '/guide/development-tools/maven.md' }
           ]

@@ -98,6 +98,15 @@ layout: home
 
 <div class="recent-updates">
   <div class="update-item">
+    <div class="update-icon">⚡</div>
+    <div class="update-content">
+      <h4><a href="./guide/development-tools/emmet.md">Emmet语法文档新增</a></h4>
+      <p>新增Emmet详细文档，全面讲解HTML/CSS快速编码语法，包括标签展开、嵌套操作、CSS缩写、高级功能和实用技巧，显著提升前端开发效率</p>
+      <span class="update-date">2024-06-03</span>
+    </div>
+  </div>
+  
+  <div class="update-item">
     <div class="update-icon">🛡️</div>
     <div class="update-content">
       <h4><a href="./guide/framework-and-middleware/spring-security.md">Spring Security安全框架文档新增</a></h4>

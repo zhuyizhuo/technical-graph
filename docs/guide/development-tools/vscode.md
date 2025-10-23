@@ -136,4 +136,66 @@ Visual Studio Code（VS Code）是微软开发的轻量级、高性能的代码�
 3. **自定义用户片段**：创建常用代码块的用户片段
 4. **创建工作区配置**：为不同类型的项目创建和保存特定的工作区配置
 
+## Emmet在VSCode中的使用
+
+VSCode内置了对Emmet的支持，可以直接使用Emmet语法来快速编写HTML和CSS代码。
+
+### 基本使用方法
+
+1. **输入Emmet缩写**：在HTML或CSS文件中输入Emmet缩写表达式
+2. **展开缩写**：按下`Tab`键或`Enter`键展开缩写
+3. **示例**：输入`div>p*3`，然后按下`Tab`键，将展开为嵌套的div和三个p标签（HTML标签将显示为`&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;/div&gt;`）
+
+### VSCode中Emmet的特殊功能
+
+#### 1. 快速生成HTML结构
+
+- **生成完整HTML文档**：输入`!`然后按`Tab`，生成标准HTML5模板（HTML标签将显示为实体编码形式，如`&lt;!DOCTYPE html&gt;`等）
+- **生成带lang属性的HTML**：输入`!+lang:zh-CN`然后按`Tab`，生成中文HTML文档（HTML标签将显示为实体编码形式）
+
+#### 2. 代码片段选择器
+
+- 当展开的结果有多个选项时，VSCode会显示选择器让你选择所需的结果
+- 按下`Ctrl+Space`可以在输入过程中显示可用的Emmet建议
+
+#### 3. Emmet的CSS支持
+
+- 在CSS文件中输入CSS缩写后按`Tab`键展开
+- 示例：输入`w100+p20+m10`，展开为三个CSS属性声明
+
+#### 4. 在不同文件类型中使用Emmet
+
+VSCode允许在JavaScript、TypeScript等文件中使用Emmet缩写，需要通过设置启用：
+
+1. 打开设置（`Ctrl+,`）
+2. 搜索"emmet include languages"
+3. 点击"添加项"，在"项"中输入文件类型（如`javascript`），在"值"中输入`html`
+
+#### 5. 自定义Emmet配置
+
+VSCode允许自定义Emmet的行为：
+
+1. 打开设置（`Ctrl+,`）
+2. 搜索"emmet"
+3. 可以配置以下选项：
+   - `Emmet: Trigger Expansion On Tab`：是否在按Tab键时展开Emmet缩写
+   - `Emmet: Show Suggestions As Snippets`：是否将Emmet建议显示为代码片段
+   - `Emmet: Preferences`：自定义Emmet首选项
+
+#### 6. 高级Emmet功能
+
+- **快速包装代码**：选中要包装的代码，按下`Ctrl+Shift+P`，输入"Emmet: Wrap with Abbreviation"，然后输入包装的缩写
+- **使用Emmet的缩写预览**：启用`Emmet: Show Abbreviation Suggestions`设置，可以预览Emmet缩写的展开结果
+
+### 实用Emmet技巧在VSCode中
+
+1. **快速创建列表**：输入`ul>li*5{item $}`然后按`Tab`，生成5个带编号的列表项（HTML标签将显示为`&lt;ul&gt;&lt;li&gt;item 1&lt;/li&gt;...&lt;/ul&gt;`形式）
+2. **创建表格**：输入`table>thead>tr>th*3{Header $}^tbody>tr*2>td*3{$}`然后按`Tab`，生成一个3列2行的表格（HTML标签将显示为实体编码形式）
+3. **生成响应式布局**：输入`div.container>div.row>div.col-md-6*2`然后按`Tab`，生成Bootstrap风格的响应式布局（HTML标签将显示为实体编码形式）
+4. **快速创建表单**：输入`form>div.form-group*3>label{${label $}}+input[type="text" name="field$" placeholder="请输入${label $}"]`然后按`Tab`，生成表单组（HTML标签将显示为实体编码形式）
+
+通过结合VSCode强大的编辑功能和Emmet的高效语法，可以显著提高前端开发的效率。掌握Emmet在VSCode中的使用方法，可以让你的编码速度提升数倍。
+
+> 注意：详细的Emmet语法规则，请参考[Emmet语法详解](./emmet.md)文档。
+
 VSCode作为一个轻量级但功能强大的代码编辑器，通过插件系统可以成为一个高效的Java开发环境。通过合理配置和使用VSCode的功能和插件，可以显著提高Java开发的效率和质量。
