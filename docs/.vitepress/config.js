@@ -19,8 +19,8 @@ export default defineConfig({
   description: '从底层原理到上层应用，构建完整的Java技术栈知识体系',
   base: '/technical-graph-doc/',
   head: [
-    ['link', { rel: 'icon', href: '/technical-graph-doc/public/favicon.ico' }],
-    ['link', { rel: 'shortcut icon', href: '/technical-graph-doc/public/favicon.ico' }]
+    ['link', { rel: 'icon', href: '/technical-graph-doc/favicon.ico' }],
+    ['link', { rel: 'shortcut icon', href: '/technical-graph-doc/favicon.ico' }]
   ],
   ignoreDeadLinks: true,
   themeConfig: {
