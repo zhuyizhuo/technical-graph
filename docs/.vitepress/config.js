@@ -110,10 +110,10 @@ export default defineConfig({
               collapsed: true,
               items: [{ text: 'Redis 基础', link: '/guide/framework-and-middleware/redis.md' }]
             },
-            {
-              text: "消息队列",
+            { text: "消息队列",
               collapsed: true,
               items: [
+                { text: '消息队列概览', link: '/guide/framework-and-middleware/message-queue-overview.md' },
                 { text: 'Kafka 基础', link: '/guide/framework-and-middleware/kafka.md' },
                 { text: 'RabbitMQ 基础', link: '/guide/framework-and-middleware/rabbitmq.md' },
                 { text: 'RocketMQ 基础', link: '/guide/framework-and-middleware/rocketmq.md' }
@@ -163,7 +163,8 @@ export default defineConfig({
                 { text: 'JNDI 基础', link: '/guide/framework-and-middleware/jndi.md' },
                 { text: 'Shiro 基础', link: '/guide/framework-and-middleware/shiro.md' },
                 { text: 'Quartz 基础', link: '/guide/framework-and-middleware/quartz.md' },
-                { text: 'Jenkins基础', link: '/guide/framework-and-middleware/jenkins.md' }
+                { text: 'Jenkins 基础', link: '/guide/framework-and-middleware/jenkins.md' },
+                { text: 'ZooKeeper 基础', link: '/guide/framework-and-middleware/zookeeper.md' }
               ]
             }
           ]

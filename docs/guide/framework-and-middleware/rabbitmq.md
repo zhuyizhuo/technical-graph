@@ -5,14 +5,138 @@
 RabbitMQ是一个开源的消息代理软件，实现了高级消息队列协议（AMQP），用于可靠地处理分布式系统中的消息传递。
 
 ### 1.1 RabbitMQ的基本概念
-- **消息（Message）**：在应用间传递的数据，可以包含任何信息
-- **生产者（Producer）**：发送消息的应用程序
-- **消费者（Consumer）**：接收并处理消息的应用程序
-- **队列（Queue）**：存储消息的缓冲区，位于RabbitMQ服务器上
-- **交换机（Exchange）**：接收生产者发送的消息，并根据路由规则将消息路由到一个或多个队列
-- **绑定（Binding）**：交换机与队列之间的关联关系
-- **路由键（Routing Key）**：生产者发送消息时指定的键，用于交换机决定消息的路由路径
-- **虚拟主机（Virtual Host）**：提供逻辑上的隔离，允许不同应用程序使用相同的RabbitMQ服务器但相互隔离
+
+#### 1.1.1 消息（Message）
+
+**概念**：在应用间传递的数据，可以包含任何信息
+
+**使用方法**：
+- 消息通常包含有效载荷（Payload）和消息属性（Headers）
+- 有效载荷可以是任何格式的数据，常见的有JSON、XML、纯文本等
+- 消息属性包括消息ID、过期时间、优先级、持久化标记等
+
+**最佳实践**：
+- 消息大小应适中，避免过大（建议不超过128KB），过大的消息会影响性能
+- 消息内容应结构化，便于序列化和反序列化
+- 为每条消息添加唯一标识符，便于追踪和调试
+- 实现消息的幂等性处理，确保重复消费不会产生副作用
+
+#### 1.1.2 生产者（Producer）
+
+**概念**：发送消息的应用程序
+
+**使用方法**：
+- 创建与RabbitMQ服务器的连接
+- 在连接上创建一个或多个信道（Channel）
+- 通过信道声明交换机和队列（如需要）
+- 通过信道向交换机发送消息，指定路由键
+
+**最佳实践**：
+- 使用连接池管理TCP连接，避免频繁创建和关闭连接
+- 使用发布确认机制确保消息被成功投递到交换机
+- 实现重试机制处理消息发送失败的情况
+- 使用异步方式发送消息，避免阻塞主线程
+- 合理设置消息的持久化属性，根据业务重要性决定
+
+#### 1.1.3 消费者（Consumer）
+
+**概念**：接收并处理消息的应用程序
+
+**使用方法**：
+- 创建与RabbitMQ服务器的连接
+- 在连接上创建信道
+- 通过信道声明要消费的队列（如需要）
+- 注册消息处理器，通过订阅方式接收消息
+- 处理完消息后发送确认（Ack）或拒绝（Nack/Reject）
+
+**最佳实践**：
+- 使用手动确认模式，确保消息被正确处理后再确认
+- 设置合理的预取计数（Prefetch Count），控制一次接收的消息数量
+- 实现消息处理超时和重试机制
+- 避免长时间阻塞信道，消息处理逻辑应尽可能高效
+- 处理异常情况，避免未确认的消息导致队列堵塞
+
+#### 1.1.4 队列（Queue）
+
+**概念**：存储消息的缓冲区，位于RabbitMQ服务器上
+
+**使用方法**：
+- 通过客户端API声明队列，指定队列名称和属性
+- 常见属性包括：持久化（durable）、排他性（exclusive）、自动删除（autoDelete）等
+- 队列可以通过绑定与交换机关联，接收路由的消息
+- 消费者可以从队列中获取和消费消息
+
+**最佳实践**：
+- 为队列设置有意义的名称，方便管理和监控
+- 重要的队列应设置为持久化，确保服务重启后数据不丢失
+- 设置合理的队列长度限制，防止队列无限增长导致内存溢出
+- 考虑使用惰性队列（Lazy Queue）存储大量消息
+- 定期监控队列的消息堆积情况，及时处理异常
+
+#### 1.1.5 交换机（Exchange）
+
+**概念**：接收生产者发送的消息，并根据路由规则将消息路由到一个或多个队列
+
+**使用方法**：
+- 通过客户端API声明交换机，指定名称和类型
+- RabbitMQ支持四种主要交换机类型：Direct、Fanout、Topic、Headers
+- 交换机通过绑定关系与队列关联
+- 生产者发送消息时，消息首先到达交换机
+
+**最佳实践**：
+- 根据业务需求选择合适的交换机类型
+- 重要的交换机应设置为持久化
+- 为不同业务场景创建专用的交换机，避免混用
+- 合理设计交换机的名称，遵循命名规范
+- 对于不需要路由的场景（如发布/订阅），使用Fanout交换机可以获得更好的性能
+
+#### 1.1.6 绑定（Binding）
+
+**概念**：交换机与队列之间的关联关系
+
+**使用方法**：
+- 通过客户端API创建绑定，指定交换机、队列和绑定键（Binding Key）
+- 一个队列可以绑定到多个交换机
+- 一个交换机可以绑定到多个队列
+- 绑定键的含义取决于交换机的类型
+
+**最佳实践**：
+- 为绑定键使用有意义的名称，便于理解路由规则
+- 在Topic交换机中，合理设计路由键的层次结构
+- 避免创建过多的绑定，可能导致性能下降
+- 定期审查和清理不再使用的绑定
+
+#### 1.1.7 路由键（Routing Key）
+
+**概念**：生产者发送消息时指定的键，用于交换机决定消息的路由路径
+
+**使用方法**：
+- 生产者发送消息时指定路由键
+- 交换机根据自身类型和路由键决定消息的流向
+- Direct交换机：精确匹配路由键和绑定键
+- Topic交换机：使用通配符（*和#）匹配路由键和绑定键
+
+**最佳实践**：
+- 路由键应简洁明了，避免过长
+- 在Topic交换机中，使用点分隔的层次结构命名路由键
+- 为不同业务场景设计一致的路由键命名规范
+- 避免在路由键中包含敏感信息
+
+#### 1.1.8 虚拟主机（Virtual Host）
+
+**概念**：提供逻辑上的隔离，允许不同应用程序使用相同的RabbitMQ服务器但相互隔离
+
+**使用方法**：
+- 通过管理界面或API创建虚拟主机
+- 为不同的应用或环境（开发、测试、生产）创建独立的虚拟主机
+- 为虚拟主机分配用户和权限
+- 客户端连接时指定要使用的虚拟主机
+
+**最佳实践**：
+- 使用虚拟主机进行多租户隔离，提高安全性
+- 为不同的环境（开发、测试、生产）创建独立的虚拟主机
+- 为虚拟主机分配适当的资源限制
+- 定期审查虚拟主机的使用情况，清理不再使用的虚拟主机
 
 ### 1.2 RabbitMQ的特点
 - 可靠性：支持消息持久化、确认机制、事务等特性
@@ -44,11 +168,76 @@ RabbitMQ采用典型的客户端-服务器架构，主要组件包括：
 
 ### 2.2 消息流转过程
 
-1. 生产者连接到RabbitMQ服务器，创建一个信道（Channel）
-2. 生产者发送消息到交换机，并指定路由键
-3. 交换机根据自身类型和绑定规则，将消息路由到一个或多个队列
-4. 消费者连接到RabbitMQ服务器，从队列中接收消息
-5. 消费者处理消息，并根据配置确认消息已被处理
+RabbitMQ的消息流转是一个完整的过程，涉及到多个核心概念和组件的协同工作。下面详细说明消息从生产者发送到消费者接收的完整流转过程：
+
+#### 2.2.1 消息发布阶段
+
+1. **连接建立**：生产者应用程序首先与RabbitMQ服务器建立TCP连接。在实际应用中，为了提高性能，通常会使用连接池来管理这些TCP连接。
+
+2. **创建信道（Channel）**：在TCP连接的基础上，生产者创建一个或多个信道。信道是轻量级的连接，共享同一个TCP连接。通过信道，生产者可以发送和接收消息，而不需要为每个操作创建新的TCP连接。
+
+3. **声明交换机和队列**：生产者可以选择性地声明交换机和队列（如果它们不存在）。在声明时，可以指定交换机和队列的属性，如是否持久化、是否排他性等。
+
+4. **建立绑定关系**：生产者或管理员需要建立交换机与队列之间的绑定关系，并指定绑定键（Binding Key）。这一步定义了消息的路由规则。
+
+5. **消息发布**：生产者通过信道向交换机发送消息，同时指定一个路由键（Routing Key）。消息通常包含有效载荷（Payload）和属性（如消息ID、过期时间、持久化标记等）。
+
+#### 2.2.2 消息路由阶段
+
+1. **接收消息**：交换机接收来自生产者的消息和路由键。
+
+2. **路由决策**：根据交换机的类型和路由规则，交换机决定如何路由消息：
+   - **Direct Exchange**：将路由键与绑定键进行精确匹配
+   - **Fanout Exchange**：忽略路由键，将消息广播到所有绑定的队列
+   - **Topic Exchange**：使用通配符匹配路由键和绑定键
+   - **Headers Exchange**：根据消息头中的键值对进行匹配，忽略路由键
+
+3. **消息分发**：交换机将消息分发到匹配的队列中。如果没有匹配的队列，消息可能会被丢弃或返回给生产者（取决于mandatory参数设置）。
+
+#### 2.2.3 消息存储阶段
+
+1. **消息入队**：消息被路由到队列后，会根据队列的配置进行处理：
+   - 如果队列设置为持久化（Durable），消息会被写入磁盘
+   - 如果队列是内存队列，消息仅存储在内存中
+
+2. **消息排队**：消息按照FIFO（先进先出）的顺序在队列中排队，等待消费者处理。
+
+3. **消息过期**：如果消息设置了TTL（Time To Live）属性，到期后消息会被从队列中移除，可能会被路由到死信队列（如果配置了的话）。
+
+#### 2.2.4 消息消费阶段
+
+1. **消费者连接**：消费者应用程序与RabbitMQ服务器建立TCP连接，并创建信道。
+
+2. **队列订阅**：消费者通过信道订阅一个或多个队列，表明它希望接收这些队列中的消息。
+
+3. **消息分发**：RabbitMQ服务器根据消费者的预取计数（Prefetch Count）设置，将适量的消息发送给消费者。
+
+4. **消息接收**：消费者接收消息并进行处理。
+
+5. **消息确认**：消费者处理完消息后，会向RabbitMQ发送确认消息（Acknowledge）：
+   - 在自动确认模式下，消息一旦发送给消费者，就被视为已确认
+   - 在手动确认模式下，消费者需要显式发送确认消息
+
+6. **消息删除**：RabbitMQ收到确认消息后，将消息从队列中删除。
+
+#### 2.2.5 消息流转中的关键机制
+
+1. **确认机制**：确保消息被可靠传递和处理
+   - 生产者确认：确保消息被交换机接收
+   - 消费者确认：确保消息被消费者正确处理
+
+2. **持久化机制**：确保消息在RabbitMQ服务器重启后不会丢失
+   - 交换机持久化
+   - 队列持久化
+   - 消息持久化
+
+3. **事务机制**：将多个操作作为原子单元执行，确保数据一致性
+
+4. **发布确认机制**：轻量级的确认机制，比事务更高效
+
+5. **死信处理**：处理无法被正常消费的消息
+
+通过以上完整的消息流转过程，RabbitMQ实现了可靠、灵活、高效的消息传递，为分布式系统提供了强大的通信基础设施。
 
 ### 2.3 核心组件详解
 
@@ -324,12 +513,144 @@ RabbitMQ支持SSL/TLS加密通信，可以防止消息被窃听和篡改：
 - 订单处理涉及多个系统，需要确保数据一致性
 - 系统需要高可用，不能因为单点故障而影响业务
 
-**解决方案**：
-- 使用RabbitMQ集群部署，配置镜像队列确保高可用性
-- 采用发布/订阅模式，将订单消息广播到不同的处理系统
-- 实现消息确认机制和重试机制，确保消息被正确处理
-- 设计幂等性消息处理逻辑，防止消息重复消费
-- 设置死信队列，处理无法正常消费的消息
+**解决方案与配置信息**：
+
+#### 9.1.1 集群配置
+```properties
+# rabbitmq.config 集群配置示例
+[{
+  rabbit,
+  [
+    {cluster_nodes, {['rabbit@rabbit1', 'rabbit@rabbit2', 'rabbit@rabbit3'], disc}},
+    {cluster_partition_handling, autoheal},
+    {queue_master_locator, min-masters},
+    {vm_memory_high_watermark, 0.7}
+  ]
+}]
+```
+
+#### 9.1.2 镜像队列策略配置
+```bash
+# 通过命令行设置镜像队列策略
+rabbitmqctl set_policy ha-order "^order\." '{"ha-mode":"exactly","ha-params":2,"ha-sync-mode":"automatic"}'
+```
+
+#### 9.1.3 交换机和队列声明（Java代码示例）
+```java
+// 订单交换机和队列声明
+Channel channel = connection.createChannel();
+
+// 1. 声明订单事件交换机（Topic类型，持久化）
+channel.exchangeDeclare("order.event.exchange", "topic", true);
+
+// 2. 声明订单处理队列（持久化）
+Map<String, Object> orderQueueArgs = new HashMap<>();
+orderQueueArgs.put("x-dead-letter-exchange", "order.dlx.exchange");
+orderQueueArgs.put("x-max-length", 100000);
+channel.queueDeclare("order.process.queue", true, false, false, orderQueueArgs);
+
+// 3. 声明库存处理队列
+channel.queueDeclare("inventory.process.queue", true, false, false, null);
+
+// 4. 声明支付处理队列
+channel.queueDeclare("payment.process.queue", true, false, false, null);
+
+// 5. 声明物流通知队列
+channel.queueDeclare("logistics.notification.queue", true, false, false, null);
+
+// 6. 声明死信交换机和队列
+channel.exchangeDeclare("order.dlx.exchange", "topic", true);
+channel.queueDeclare("order.dead.letter.queue", true, false, false, null);
+channel.queueBind("order.dead.letter.queue", "order.dlx.exchange", "#");
+
+// 7. 绑定交换机和队列
+channel.queueBind("order.process.queue", "order.event.exchange", "order.created");
+channel.queueBind("inventory.process.queue", "order.event.exchange", "order.created");
+channel.queueBind("payment.process.queue", "order.event.exchange", "order.payment.pending");
+channel.queueBind("logistics.notification.queue", "order.event.exchange", "order.payment.confirmed");
+```
+
+#### 9.1.4 生产者配置（发布确认模式）
+```java
+// 开启发布确认模式
+channel.confirmSelect();
+
+// 异步确认监听器
+channel.addConfirmListener(new ConfirmListener() {
+    @Override
+    public void handleAck(long deliveryTag, boolean multiple) {
+        // 消息确认成功处理
+        System.out.println("消息确认成功: " + deliveryTag);
+    }
+    
+    @Override
+    public void handleNack(long deliveryTag, boolean multiple) {
+        // 消息确认失败处理（可以实现重试逻辑）
+        System.out.println("消息确认失败: " + deliveryTag);
+        // 实现重试机制
+    }
+});
+
+// 发送订单消息
+AMQP.BasicProperties properties = new AMQP.BasicProperties.Builder()
+    .messageId(UUID.randomUUID().toString())
+    .deliveryMode(2) // 持久化
+    .timestamp(new Date())
+    .contentType("application/json")
+    .build();
+
+String orderJson = "{\"orderId\": \"12345\", \"amount\": 99.99, \"items\": [...]}";
+channel.basicPublish("order.event.exchange", "order.created", properties, orderJson.getBytes());
+```
+
+#### 9.1.5 消费者配置（手动确认）
+```java
+// 消费者配置（手动确认模式）
+channel.basicQos(10); // 预取计数
+channel.basicConsume("order.process.queue", false, new DefaultConsumer(channel) {
+    @Override
+    public void handleDelivery(String consumerTag, Envelope envelope, 
+                              AMQP.BasicProperties properties, byte[] body) throws IOException {
+        String orderJson = new String(body, "UTF-8");
+        String messageId = properties.getMessageId();
+        
+        try {
+            // 幂等性检查（基于messageId）
+            if (isMessageProcessed(messageId)) {
+                channel.basicAck(envelope.getDeliveryTag(), false);
+                return;
+            }
+            
+            // 处理订单逻辑
+            processOrder(orderJson);
+            
+            // 记录消息已处理
+            markMessageAsProcessed(messageId);
+            
+            // 确认消息
+            channel.basicAck(envelope.getDeliveryTag(), false);
+        } catch (Exception e) {
+            // 处理异常，拒绝消息并重新入队或直接拒绝
+            if (shouldRetry(e)) {
+                // 重新入队（带延迟）
+                Map<String, Object> headers = new HashMap<>(properties.getHeaders() != null ? properties.getHeaders() : Collections.emptyMap());
+                Integer retryCount = (Integer) headers.getOrDefault("x-retry-count", 0);
+                if (retryCount < 3) { // 最多重试3次
+                    headers.put("x-retry-count", retryCount + 1);
+                    AMQP.BasicProperties newProperties = new AMQP.BasicProperties.Builder()
+                        .copy(properties)
+                        .headers(headers)
+                        .expiration(String.valueOf(1000 * (retryCount + 1))) // 指数退避延迟
+                        .build();
+                    channel.basicPublish("order.event.exchange", envelope.getRoutingKey(), newProperties, body);
+                }
+            }
+            // 拒绝消息，不重新入队（将进入死信队列）
+            channel.basicNack(envelope.getDeliveryTag(), false, false);
+        }
+    }
+});
+```
 
 **效果**：系统吞吐量达到每秒10,000+订单，可用性达到99.99%，消息丢失率为0。
 
@@ -343,12 +664,191 @@ RabbitMQ支持SSL/TLS加密通信，可以防止消息被窃听和篡改：
 - 需要实时处理日志
 - 系统需要可扩展
 
-**解决方案**：
-- 使用RabbitMQ的Fanout交换机，实现日志的广播
-- 每个微服务将日志发送到RabbitMQ
-- 使用多个消费者处理日志，包括日志存储、分析、告警等
-- 实现日志格式标准化
-- 根据日志量自动扩缩容消费者数量
+**解决方案与配置信息**：
+
+#### 9.2.1 交换机和队列配置
+```java
+// 日志交换机和队列声明
+Channel channel = connection.createChannel();
+
+// 1. 声明Fanout类型的日志交换机（持久化）
+channel.exchangeDeclare("logs.fanout.exchange", "fanout", true);
+
+// 2. 声明不同处理目的的队列
+channel.queueDeclare("logs.storage.queue", true, false, false, null);
+channel.queueDeclare("logs.analysis.queue", true, false, false, null);
+channel.queueDeclare("logs.alert.queue", true, false, false, null);
+channel.queueDeclare("logs.realtime.queue", true, false, false, null);
+
+// 3. 所有队列都绑定到Fanout交换机（忽略路由键）
+channel.queueBind("logs.storage.queue", "logs.fanout.exchange", "");
+channel.queueBind("logs.analysis.queue", "logs.fanout.exchange", "");
+channel.queueBind("logs.alert.queue", "logs.fanout.exchange", "");
+channel.queueBind("logs.realtime.queue", "logs.fanout.exchange", "");
+```
+
+#### 9.2.2 微服务日志生产者配置
+```java
+// 微服务中的日志发送器配置
+public class RabbitMQLogSender {
+    private final Channel channel;
+    private final String serviceName;
+    
+    public RabbitMQLogSender(Channel channel, String serviceName) {
+        this.channel = channel;
+        this.serviceName = serviceName;
+    }
+    
+    public void sendLog(LogLevel level, String message, Map<String, Object> additionalFields) throws IOException {
+        // 标准化日志格式
+        Map<String, Object> logJson = new HashMap<>();
+        logJson.put("timestamp", new Date().toInstant().toEpochMilli());
+        logJson.put("service", serviceName);
+        logJson.put("level", level.name());
+        logJson.put("message", message);
+        logJson.put("host", getHostName());
+        logJson.put("thread", Thread.currentThread().getName());
+        
+        if (additionalFields != null) {
+            logJson.putAll(additionalFields);
+        }
+        
+        String jsonMessage = new ObjectMapper().writeValueAsString(logJson);
+        
+        // 设置消息属性
+        AMQP.BasicProperties properties = new AMQP.BasicProperties.Builder()
+            .contentType("application/json")
+            .priority(getLogLevelPriority(level)) // 根据日志级别设置优先级
+            .build();
+        
+        // 发送到Fanout交换机
+        channel.basicPublish("logs.fanout.exchange", "", properties, jsonMessage.getBytes());
+    }
+    
+    private int getLogLevelPriority(LogLevel level) {
+        switch (level) {
+            case ERROR: return 10;
+            case WARN: return 8;
+            case INFO: return 6;
+            case DEBUG: return 4;
+            case TRACE: return 2;
+            default: return 5;
+        }
+    }
+    
+    private String getHostName() {
+        try {
+            return InetAddress.getLocalHost().getHostName();
+        } catch (UnknownHostException e) {
+            return "unknown";
+        }
+    }
+}
+```
+
+#### 9.2.3 消费者配置示例（日志存储消费者）
+```java
+// 日志存储消费者配置
+Channel channel = connection.createChannel();
+
+// 设置QoS，控制流量
+channel.basicQos(100);
+
+// 声明队列（确保队列存在）
+channel.queueDeclare("logs.storage.queue", true, false, false, null);
+
+// 消费者配置
+channel.basicConsume("logs.storage.queue", false, "storage-consumer", new DefaultConsumer(channel) {
+    @Override
+    public void handleDelivery(String consumerTag, Envelope envelope, 
+                              AMQP.BasicProperties properties, byte[] body) throws IOException {
+        String logJson = new String(body, "UTF-8");
+        
+        try {
+            // 解析日志
+            Map<String, Object> logEntry = new ObjectMapper().readValue(logJson, Map.class);
+            
+            // 根据服务名和日期确定存储位置
+            String service = (String) logEntry.get("service");
+            String date = new SimpleDateFormat("yyyy-MM-dd").format(
+                new Date(((Number) logEntry.get("timestamp")).longValue()));
+            
+            // 存储到适当的存储系统（例如Elasticsearch、HDFS等）
+            storeLog(service, date, logEntry);
+            
+            // 确认消息
+            channel.basicAck(envelope.getDeliveryTag(), false);
+        } catch (Exception e) {
+            // 记录错误但继续处理，避免阻塞队列
+            System.err.println("Error processing log: " + e.getMessage());
+            channel.basicAck(envelope.getDeliveryTag(), false);
+        }
+    }
+});
+```
+
+#### 9.2.4 告警消费者配置
+```java
+// 告警消费者配置
+Channel channel = connection.createChannel();
+channel.basicQos(50); // 较小的预取计数，确保告警及时处理
+channel.basicConsume("logs.alert.queue", false, "alert-consumer", new DefaultConsumer(channel) {
+    @Override
+    public void handleDelivery(String consumerTag, Envelope envelope, 
+                              AMQP.BasicProperties properties, byte[] body) throws IOException {
+        try {
+            Map<String, Object> logEntry = new ObjectMapper().readValue(new String(body, "UTF-8"), Map.class);
+            
+            // 检查是否需要告警
+            String level = (String) logEntry.get("level");
+            String message = (String) logEntry.get("message");
+            
+            if ("ERROR".equals(level) || message.contains("critical")) {
+                // 触发告警（发送邮件、短信、调用告警API等）
+                triggerAlert(
+                    (String) logEntry.get("service"),
+                    level,
+                    message,
+                    (Number) logEntry.get("timestamp")
+                );
+            }
+            
+            channel.basicAck(envelope.getDeliveryTag(), false);
+        } catch (Exception e) {
+            // 告警处理失败也要确认消息，避免死循环
+            channel.basicAck(envelope.getDeliveryTag(), false);
+        }
+    }
+});
+```
+
+#### 9.2.5 自动扩缩容配置（Kubernetes环境示例）
+```yaml
+# Kubernetes HorizontalPodAutoscaler配置示例
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: log-consumer-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: log-consumer
+  minReplicas: 3
+  maxReplicas: 20
+  metrics:
+  - type: Object
+    object:
+      target:
+        apiVersion: apps/v1
+        kind: Deployment
+        name: log-consumer
+      metric:
+        name: queue_length
+      target:
+        type: AverageValue
+        averageValue: 100
+```
 
 **效果**：日志处理延迟小于1秒，系统可以轻松处理TB级别的日志数据，运维成本降低了50%。
 
@@ -362,12 +862,253 @@ RabbitMQ支持SSL/TLS加密通信，可以防止消息被窃听和篡改：
 - 需要支持任务优先级和依赖关系
 - 系统需要易于监控和管理
 
-**解决方案**：
-- 使用RabbitMQ作为任务队列，存储待执行的任务
-- 设计任务调度器，根据任务的定时规则和优先级，将任务发送到RabbitMQ
-- 部署多个工作节点，从RabbitMQ接收任务并执行
-- 实现任务状态跟踪和结果反馈机制
-- 使用延迟队列实现定时任务
+**解决方案与配置信息**：
+
+#### 9.3.1 延迟队列配置
+```java
+// 延迟队列配置
+Channel channel = connection.createChannel();
+
+// 1. 声明任务交换机
+channel.exchangeDeclare("task.scheduler.exchange", "direct", true);
+
+// 2. 声明死信交换机（用于定时任务）
+channel.exchangeDeclare("task.deadletter.exchange", "direct", true);
+
+// 3. 声明任务队列
+Map<String, Object> taskQueueArgs = new HashMap<>();
+taskQueueArgs.put("x-dead-letter-exchange", "task.deadletter.exchange");
+// 根据任务优先级设置队列支持优先级
+taskQueueArgs.put("x-max-priority", 10);
+channel.queueDeclare("task.execution.queue", true, false, false, taskQueueArgs);
+
+// 4. 声明延迟队列（用于存储待执行的定时任务）
+Map<String, Object> delayQueueArgs = new HashMap<>();
+delayQueueArgs.put("x-dead-letter-exchange", "task.scheduler.exchange");
+delayQueueArgs.put("x-dead-letter-routing-key", "task.execute");
+channel.queueDeclare("task.delay.queue", true, false, false, delayQueueArgs);
+
+// 5. 绑定队列
+channel.queueBind("task.execution.queue", "task.deadletter.exchange", "task.execute");
+```
+
+#### 9.3.2 任务调度器配置
+```java
+public class TaskScheduler {
+    private final Channel channel;
+    
+    public TaskScheduler(Channel channel) {
+        this.channel = channel;
+    }
+    
+    // 添加定时任务
+    public String scheduleTask(String taskType, Map<String, Object> taskData, Date executeTime, int priority) throws IOException {
+        String taskId = UUID.randomUUID().toString();
+        
+        // 构建任务对象
+        Map<String, Object> task = new HashMap<>();
+        task.put("taskId", taskId);
+        task.put("taskType", taskType);
+        task.put("taskData", taskData);
+        task.put("scheduledTime", new Date());
+        task.put("executeTime", executeTime);
+        task.put("priority", priority);
+        task.put("status", "SCHEDULED");
+        
+        // 计算延迟时间（毫秒）
+        long delay = Math.max(0, executeTime.getTime() - System.currentTimeMillis());
+        
+        // 设置消息属性，包括优先级和过期时间
+        AMQP.BasicProperties properties = new AMQP.BasicProperties.Builder()
+            .messageId(taskId)
+            .deliveryMode(2) // 持久化
+            .priority(priority)
+            .expiration(String.valueOf(delay)) // 设置消息过期时间作为延迟
+            .contentType("application/json")
+            .build();
+        
+        String taskJson = new ObjectMapper().writeValueAsString(task);
+        
+        // 发送到延迟队列
+        channel.basicPublish("", "task.delay.queue", properties, taskJson.getBytes());
+        
+        return taskId;
+    }
+    
+    // 取消任务（通过从延迟队列中删除）
+    public boolean cancelTask(String taskId) throws IOException {
+        // 注意：RabbitMQ不支持直接从队列中删除特定消息
+        // 实际实现中可以通过维护任务状态表，在消费者端检查任务是否已被取消
+        // 或者使用RabbitMQ的优先级特性，将取消的任务标记为低优先级
+        return updateTaskStatus(taskId, "CANCELLED");
+    }
+}
+```
+
+#### 9.3.3 任务执行器配置
+```java
+public class TaskExecutor {
+    private final Channel channel;
+    private final Map<String, TaskProcessor> taskProcessors;
+    
+    public TaskExecutor(Channel channel) {
+        this.channel = channel;
+        this.taskProcessors = new HashMap<>();
+        registerTaskProcessors();
+    }
+    
+    private void registerTaskProcessors() {
+        // 注册不同类型的任务处理器
+        taskProcessors.put("REPORT_GENERATION", new ReportGenerationProcessor());
+        taskProcessors.put("DATA_BACKUP", new DataBackupProcessor());
+        taskProcessors.put("SYSTEM_MAINTENANCE", new SystemMaintenanceProcessor());
+    }
+    
+    public void startConsuming() throws IOException {
+        // 设置QoS
+        channel.basicQos(5); // 根据处理能力设置
+        
+        // 开始消费任务队列
+        channel.basicConsume("task.execution.queue", false, new DefaultConsumer(channel) {
+            @Override
+            public void handleDelivery(String consumerTag, Envelope envelope, 
+                                      AMQP.BasicProperties properties, byte[] body) throws IOException {
+                String taskId = properties.getMessageId();
+                
+                try {
+                    // 检查任务是否已被取消
+                    if (isTaskCancelled(taskId)) {
+                        channel.basicAck(envelope.getDeliveryTag(), false);
+                        return;
+                    }
+                    
+                    // 更新任务状态为执行中
+                    updateTaskStatus(taskId, "EXECUTING");
+                    
+                    // 解析任务
+                    Map<String, Object> task = new ObjectMapper().readValue(new String(body, "UTF-8"), Map.class);
+                    String taskType = (String) task.get("taskType");
+                    
+                    // 获取对应的处理器
+                    TaskProcessor processor = taskProcessors.get(taskType);
+                    if (processor == null) {
+                        throw new IllegalStateException("No processor found for task type: " + taskType);
+                    }
+                    
+                    // 执行任务
+                    TaskResult result = processor.execute(task);
+                    
+                    // 更新任务结果
+                    updateTaskResult(taskId, result);
+                    
+                    // 确认消息
+                    channel.basicAck(envelope.getDeliveryTag(), false);
+                    
+                } catch (Exception e) {
+                    // 处理任务执行失败
+                    handleTaskFailure(taskId, e);
+                    
+                    // 重试或拒绝消息
+                    int retryCount = getRetryCount(properties);
+                    if (retryCount < 3) { // 最多重试3次
+                        // 重新入队，增加重试计数
+                        AMQP.BasicProperties newProperties = new AMQP.BasicProperties.Builder()
+                            .copy(properties)
+                            .headers(Collections.singletonMap("x-retry-count", retryCount + 1))
+                            .build();
+                        channel.basicPublish("task.scheduler.exchange", "task.execute", newProperties, body);
+                    }
+                    
+                    // 拒绝消息，不重新入队
+                    channel.basicNack(envelope.getDeliveryTag(), false, false);
+                }
+            }
+        });
+    }
+    
+    private int getRetryCount(AMQP.BasicProperties properties) {
+        Map<String, Object> headers = properties.getHeaders();
+        if (headers != null && headers.containsKey("x-retry-count")) {
+            return (int) headers.get("x-retry-count");
+        }
+        return 0;
+    }
+}
+```
+
+#### 9.3.4 任务状态跟踪配置
+```java
+public class TaskStatusTracker {
+    // 实际应用中可能使用数据库存储任务状态
+    private final DataSource dataSource;
+    
+    public TaskStatusTracker(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+    
+    public boolean updateTaskStatus(String taskId, String status) {
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement(
+                 "UPDATE scheduler_tasks SET status = ?, update_time = ? WHERE task_id = ?")) {
+            ps.setString(1, status);
+            ps.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
+            ps.setString(3, taskId);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            log.error("Failed to update task status", e);
+            return false;
+        }
+    }
+    
+    public void updateTaskResult(String taskId, TaskResult result) {
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement(
+                 "UPDATE scheduler_tasks SET status = ?, result = ?, end_time = ? WHERE task_id = ?")) {
+            ps.setString(1, result.isSuccess() ? "COMPLETED" : "FAILED");
+            ps.setString(2, result.getResultData());
+            ps.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+            ps.setString(4, taskId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            log.error("Failed to update task result", e);
+        }
+    }
+    
+    public boolean isTaskCancelled(String taskId) {
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement(
+                 "SELECT status FROM scheduler_tasks WHERE task_id = ?")) {
+            ps.setString(1, taskId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return "CANCELLED".equals(rs.getString("status"));
+                }
+            }
+        } catch (SQLException e) {
+            log.error("Failed to check task status", e);
+        }
+        return false;
+    }
+}
+```
+
+#### 9.3.5 监控配置
+```yaml
+# Prometheus配置示例
+scrape_configs:
+  - job_name: 'rabbitmq'
+    static_configs:
+      - targets: ['rabbitmq-exporter:9419']
+
+# Grafana Dashboard配置（部分）
+metrics:
+  - name: '任务队列长度'
+    query: 'rabbitmq_queue_messages{queue="task.execution.queue"}'
+  - name: '任务执行延迟'
+    query: 'rate(task_execution_duration_seconds_sum[5m]) / rate(task_execution_duration_seconds_count[5m])'
+  - name: '任务成功率'
+    query: 'sum(rate(task_execution_total{status="success"}[5m])) / sum(rate(task_execution_total[5m])) * 100'
+```
 
 **效果**：任务调度成功率达到99.99%，系统可以轻松处理每天数百万的任务，运维人员可以通过Web界面实时监控任务执行情况。
 
