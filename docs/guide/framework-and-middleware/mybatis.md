@@ -197,7 +197,7 @@ MyBatis的配置文件主要包括以下几个部分：
         <setting name="logImpl" value="LOG4J"/>
     </settings>
     
-    <!-- 类型别名 -->
+    <!-- 类型别名 默认为类名首字母小写（如User别名为user） -->
     <typeAliases>
         <package name="com.example.entity"/>
     </typeAliases>
@@ -398,6 +398,15 @@ public interface UserMapper {
     
     // 根据ID删除用户
     int deleteUserById(Integer id);
+}
+```
+
+#### 4.2.3 User实体类定义
+使用`@Alias`注解自定义别名：如果你不希望使用默认的类名首字母小写作为别名，可以在你的实体类上使用`@Alias`注解来指定一个自定义的别名。
+```java
+@Alias("User")
+public class User {
+    // ...
 }
 ```
 
