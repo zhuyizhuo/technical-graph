@@ -265,6 +265,21 @@ docker inspect my-container
 
 Docker Compose 是一个用于定义和运行多容器 Docker 应用程序的工具。通过 Compose，您可以使用 YAML 文件来配置应用程序的服务、网络和卷，然后使用单个命令创建并启动所有服务。
 
+#### 5.1.1 Docker Compose v2 版本说明
+
+Docker Compose v2 是 Docker 官方推荐的最新主要版本，作为原始 `docker-compose` 工具（v1）的替代品，它具有以下特点：
+
+- **官方支持**：v2 是 Docker 官方积极维护和支持的版本，而 v1 已进入维护模式
+- **集成到 Docker CLI**：v2 作为 Docker CLI 的一部分提供，使用 `docker compose` 命令（注意中间没有连字符）
+- **Go 语言重写**：相比 v1 的 Python 实现，v2 使用 Go 语言重写，提供更好的性能和可靠性
+- **增强的并行操作**：v2 优化了服务启动和停止的并行处理，显著提升了性能
+- **更好的错误处理**：提供更清晰、更详细的错误消息和处理机制
+- **完全兼容现有 Compose 文件**：与 v1 的 Compose 文件格式完全兼容，无需修改配置文件
+
+**安装方式**：
+- 在 Docker Desktop 中，Compose v2 已默认包含
+- 在 Linux 系统上，可以通过 Docker 引擎安装（Docker Engine 20.10.0+ 版本包含 Compose v2）
+
 ### 5.2 Compose 文件基本结构
 
 ```yaml
@@ -298,33 +313,71 @@ networks:
 
 ### 5.3 Docker Compose 常用命令
 
+#### 5.3.1 命令格式对比
+
+Docker Compose 有两种命令格式：
+
+**V1 版本（传统格式）**：使用连字符 `docker-compose`
+**V2 版本（推荐格式）**：作为 Docker CLI 插件 `docker compose`（无连字符）
+
+#### 5.3.2 常用命令示例
+
 ```bash
+# V1 和 V2 命令格式对比
+
 # 启动所有服务
+# V1
 docker-compose up -d
+# V2（推荐）
+docker compose up -d
 
 # 启动指定服务
+# V1
 docker-compose up -d web
+# V2（推荐）
+docker compose up -d web
 
 # 查看服务状态
+# V1
 docker-compose ps
+# V2（推荐）
+docker compose ps
 
 # 查看服务日志
+# V1
 docker-compose logs
+# V2（推荐）
+docker compose logs
 
 # 查看指定服务日志
+# V1
 docker-compose logs web
+# V2（推荐）
+docker compose logs web
 
 # 停止所有服务
+# V1
 docker-compose down
+# V2（推荐）
+docker compose down
 
 # 停止并删除容器、网络、卷和镜像
+# V1
 docker-compose down --volumes --rmi all
+# V2（推荐）
+docker compose down --volumes --rmi all
 
 # 查看服务依赖关系
+# V1
 docker-compose config --services
+# V2（推荐）
+docker compose config --services
 
 # 验证 Compose 文件
+# V1
 docker-compose config
+# V2（推荐）
+docker compose config
 ```
 
 ### 5.4 多环境配置
@@ -337,10 +390,55 @@ docker-compose config
 # 生产环境配置 docker-compose.prod.yml
 
 # 使用基础配置和开发环境配置
+# V1
 docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+# V2（推荐）
+docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
 
 # 使用基础配置和生产环境配置
+# V1
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+# V2（推荐）
+docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+```
+
+### 5.5 Docker Compose v2 的新特性和改进
+
+Docker Compose v2 引入了许多新特性和改进，以下是一些主要亮点：
+
+#### 5.5.1 性能改进
+
+- **增强的并行操作**：v2 显著提高了服务启动、停止和更新的并行处理能力
+- **更高效的资源使用**：优化了内存和 CPU 使用，特别是在管理大量服务时
+- **更快的网络设置**：改进了网络创建和配置的速度
+
+#### 5.5.2 功能增强
+
+- **命令自动完成**：作为 Docker CLI 插件，支持更完整的命令行自动完成
+- **服务健康检查**：更好地支持和显示服务健康状态
+- **改进的日志处理**：更高效的日志收集和显示机制
+- **与 Docker CLI 集成**：统一的用户体验，共享上下文和配置
+
+#### 5.5.3 维护与支持
+
+- **活跃的开发**：持续接收新功能和改进
+- **安全更新**：定期安全补丁和漏洞修复
+- **长期支持**：作为 Docker 平台的核心组件，提供长期支持
+
+#### 5.5.4 迁移指南
+
+从 v1 迁移到 v2 非常简单：
+
+1. 安装支持 v2 的 Docker 版本（Docker Desktop 或 Docker Engine 20.10.0+）
+2. 将命令从 `docker-compose` 改为 `docker compose`（移除连字符）
+3. 现有的 Compose 文件无需修改，完全兼容
+
+```bash
+# 检查 Compose 版本
+# V1
+docker-compose --version
+# V2（推荐）
+docker compose version
 ```
 
 ## 6. Docker 网络与存储管理
