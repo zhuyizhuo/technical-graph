@@ -179,6 +179,11 @@ export default defineConfig({
               items: [{ text: 'Docker 基础', link: '/guide/containerization-and-cloud-native/docker.md' }]
             },
             {
+              text: "PolarDB",
+              collapsed: true,
+              items: [{ text: 'PolarDB 基础', link: '/guide/containerization-and-cloud-native/polardb.md' }]
+            },
+            {
               text: "CI/CD",
               collapsed: true,
               items: [{ text: 'CI/CD 基础', link: '/guide/containerization-and-cloud-native/cicd.md' }]
