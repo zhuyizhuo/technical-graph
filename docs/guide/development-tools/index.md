@@ -23,6 +23,10 @@
 - **[Trae](trae.md)**：现代化的IDE，结合了轻量级编辑器的速度和功能丰富的IDE的强大功能
 - **[Visual Studio Code](vscode.md)**：微软开发的轻量级代码编辑器，通过插件系统可以支持Java开发
 
+### 终端工具
+
+- **[WindTerm](windterm.md)**：开源的跨平台SSH/SFTP/Shell/Telnet/Serial客户端，提供高性能、安全且现代化的终端体验
+
 ### 构建工具
 
 - **[Maven](maven.md)**：基于项目对象模型的Java项目管理和构建工具

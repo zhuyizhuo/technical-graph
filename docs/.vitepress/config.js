@@ -74,12 +74,12 @@ export default defineConfig({
             {
               text: "Java RMI",
               collapsed: true,
-              items: [{ text: 'RMI 基础', link: '/guide/java-core/java-rmi.md' }]
+              items: [{ text: 'RMI', link: '/guide/java-core/java-rmi.md' }]
             },
             {
               text: "Java SPI",
               collapsed: true,
-              items: [{ text: 'SPI 基础', link: '/guide/java-core/java-spi.md' }]
+              items: [{ text: 'SPI', link: '/guide/java-core/java-spi.md' }]
             }
           ]
         },
@@ -96,75 +96,75 @@ export default defineConfig({
                   collapsed: true,
                   items: [
                     { text: 'MySQL 基础', link: '/guide/framework-and-middleware/mysql.md' },
-                    { text: 'MySQL集群基础', link: '/guide/framework-and-middleware/mysql-cluster.md' }
+                    { text: 'MySQL 集群', link: '/guide/framework-and-middleware/mysql-cluster.md' }
                   ]
                 },
-                { text: 'PostgreSQL基础', link: '/guide/framework-and-middleware/postgresql.md' },
-                { text: 'MongoDB 基础', link: '/guide/framework-and-middleware/mongodb.md' },
-                { text: 'H2数据库基础', link: '/guide/framework-and-middleware/h2.md' },
-                { text: 'SQLite基础', link: '/guide/framework-and-middleware/sqlite.md' }
+                { text: 'PostgreSQL', link: '/guide/framework-and-middleware/postgresql.md' },
+                { text: 'MongoDB', link: '/guide/framework-and-middleware/mongodb.md' },
+                { text: 'H2', link: '/guide/framework-and-middleware/h2.md' },
+                { text: 'SQLite', link: '/guide/framework-and-middleware/sqlite.md' }
               ]
             },
             {
               text: "缓存系统",
               collapsed: true,
-              items: [{ text: 'Redis 基础', link: '/guide/framework-and-middleware/redis.md' }]
+              items: [{ text: 'Redis', link: '/guide/framework-and-middleware/redis.md' }]
             },
             { text: "消息队列",
               collapsed: true,
               items: [
                 { text: '消息队列概览', link: '/guide/framework-and-middleware/message-queue-overview.md' },
-                { text: 'Kafka 基础', link: '/guide/framework-and-middleware/kafka.md' },
-                { text: 'RabbitMQ 基础', link: '/guide/framework-and-middleware/rabbitmq.md' },
-                { text: 'RocketMQ 基础', link: '/guide/framework-and-middleware/rocketmq.md' }
+                { text: 'Kafka', link: '/guide/framework-and-middleware/kafka.md' },
+                { text: 'RabbitMQ', link: '/guide/framework-and-middleware/rabbitmq.md' },
+                { text: 'RocketMQ', link: '/guide/framework-and-middleware/rocketmq.md' }
               ]
             },
             {
               text: "ORM框架",
               collapsed: true,
-              items: [{ text: 'MyBatis 基础', link: '/guide/framework-and-middleware/mybatis.md' }]
+              items: [{ text: 'MyBatis', link: '/guide/framework-and-middleware/mybatis.md' }]
             },
             {
               text: "分布式服务框架",
               collapsed: true,
               items: [
-                { text: 'Dubbo 基础', link: '/guide/framework-and-middleware/dubbo.md' },
-                { text: 'Spring Cloud 基础', link: '/guide/framework-and-middleware/spring-cloud.md' }
+                { text: 'Dubbo', link: '/guide/framework-and-middleware/dubbo.md' },
+                { text: 'Spring Cloud', link: '/guide/framework-and-middleware/spring-cloud.md' }
               ]
             },
             { text: "Spring生态",
               collapsed: true,
               items: [
-                { text: 'Spring 基础', link: '/guide/framework-and-middleware/spring.md' },
-                { text: 'Spring Boot 基础', link: '/guide/framework-and-middleware/springboot.md' },
-                { text: 'Spring Data 基础', link: '/guide/framework-and-middleware/spring-data.md' },
-                { text: 'Spring Security 基础', link: '/guide/framework-and-middleware/spring-security.md' }
+                { text: 'Spring', link: '/guide/framework-and-middleware/spring.md' },
+                { text: 'Spring Boot', link: '/guide/framework-and-middleware/springboot.md' },
+                { text: 'Spring Data', link: '/guide/framework-and-middleware/spring-data.md' },
+                { text: 'Spring Security', link: '/guide/framework-and-middleware/spring-security.md' }
               ]
             },
             {
               text: "数据分片中间件",
               collapsed: true,
               items: [
-                { text: 'ShardingSphere 基础', link: '/guide/framework-and-middleware/shardingsphere.md' },
-                { text: 'MyCat 基础', link: '/guide/framework-and-middleware/mycat.md' }
+                { text: 'ShardingSphere', link: '/guide/framework-and-middleware/shardingsphere.md' },
+                { text: 'MyCat', link: '/guide/framework-and-middleware/mycat.md' }
               ]
             },
             {
               text: "搜索相关",
               collapsed: true,
-              items: [{ text: 'Elasticsearch 基础', link: '/guide/framework-and-middleware/elasticsearch.md' }]
+              items: [{ text: 'Elasticsearch', link: '/guide/framework-and-middleware/elasticsearch.md' }]
             },
             {
               text: "其他工具",
               collapsed: true,
               items: [
-                { text: 'LDAP 基础', link: '/guide/framework-and-middleware/ldap.md' },
-                { text: '邮件协议基础', link: '/guide/framework-and-middleware/email-protocols.md' },
-                { text: 'JNDI 基础', link: '/guide/framework-and-middleware/jndi.md' },
-                { text: 'Shiro 基础', link: '/guide/framework-and-middleware/shiro.md' },
-                { text: 'Quartz 基础', link: '/guide/framework-and-middleware/quartz.md' },
-                { text: 'Jenkins 基础', link: '/guide/framework-and-middleware/jenkins.md' },
-                { text: 'ZooKeeper 基础', link: '/guide/framework-and-middleware/zookeeper.md' }
+                { text: 'LDAP', link: '/guide/framework-and-middleware/ldap.md' },
+                { text: '邮件协议', link: '/guide/framework-and-middleware/email-protocols.md' },
+                { text: 'JNDI', link: '/guide/framework-and-middleware/jndi.md' },
+                { text: 'Shiro', link: '/guide/framework-and-middleware/shiro.md' },
+                { text: 'Quartz', link: '/guide/framework-and-middleware/quartz.md' },
+                { text: 'Jenkins', link: '/guide/framework-and-middleware/jenkins.md' },
+                { text: 'ZooKeeper', link: '/guide/framework-and-middleware/zookeeper.md' }
               ]
             }
           ]
@@ -176,42 +176,42 @@ export default defineConfig({
             {
               text: "Docker",
               collapsed: true,
-              items: [{ text: 'Docker 基础', link: '/guide/containerization-and-cloud-native/docker.md' }]
+              items: [{ text: 'Docker', link: '/guide/containerization-and-cloud-native/docker.md' }]
             },
             {
               text: "PolarDB",
               collapsed: true,
-              items: [{ text: 'PolarDB 基础', link: '/guide/containerization-and-cloud-native/polardb.md' }]
+              items: [{ text: 'PolarDB', link: '/guide/containerization-and-cloud-native/polardb.md' }]
             },
             {
               text: "CI/CD",
               collapsed: true,
-              items: [{ text: 'CI/CD 基础', link: '/guide/containerization-and-cloud-native/cicd.md' }]
+              items: [{ text: 'CI/CD', link: '/guide/containerization-and-cloud-native/cicd.md' }]
             },
             {
               text: "监控告警",
               collapsed: true,
-              items: [{ text: '监控告警 基础', link: '/guide/containerization-and-cloud-native/monitoring-alerting.md' }]
+              items: [{ text: '监控告警', link: '/guide/containerization-and-cloud-native/monitoring-alerting.md' }]
             },
             {
               text: "日志管理",
               collapsed: true,
-              items: [{ text: '日志管理 基础', link: '/guide/containerization-and-cloud-native/log-management.md' }]
+              items: [{ text: '日志管理', link: '/guide/containerization-and-cloud-native/log-management.md' }]
             },
             {
               text: "配置管理",
               collapsed: true,
-              items: [{ text: '配置管理 基础', link: '/guide/containerization-and-cloud-native/configuration-management.md' }]
+              items: [{ text: '配置管理', link: '/guide/containerization-and-cloud-native/configuration-management.md' }]
             },
             {
               text: "Nginx",
               collapsed: true,
-              items: [{ text: 'Nginx 基础', link: '/guide/containerization-and-cloud-native/nginx.md' }]
+              items: [{ text: 'Nginx', link: '/guide/containerization-and-cloud-native/nginx.md' }]
             },
             {
               text: "MinIO",
               collapsed: true,
-              items: [{ text: 'MinIO 基础', link: '/guide/containerization-and-cloud-native/minio.md' }]
+              items: [{ text: 'MinIO', link: '/guide/containerization-and-cloud-native/minio.md' }]
             }
           ]
         },
@@ -222,22 +222,22 @@ export default defineConfig({
             {
               text: "分布式数据库",
               collapsed: true,
-              items: [{ text: '分布式数据库 基础', link: '/guide/distributed-system/distributed-database.md' }]
+              items: [{ text: '分布式数据库', link: '/guide/distributed-system/distributed-database.md' }]
             },
             {
               text: "分布式缓存",
               collapsed: true,
-              items: [{ text: '分布式缓存 基础', link: '/guide/distributed-system/distributed-cache.md' }]
+              items: [{ text: '分布式缓存', link: '/guide/distributed-system/distributed-cache.md' }]
             },
             {
               text: "分布式服务治理",
               collapsed: true,
-              items: [{ text: '分布式服务治理 基础', link: '/guide/distributed-system/distributed-service-governance.md' }]
+              items: [{ text: '分布式服务治理', link: '/guide/distributed-system/distributed-service-governance.md' }]
             },
             {
               text: "分布式调度",
               collapsed: true,
-              items: [{ text: '分布式调度 基础', link: '/guide/distributed-system/distributed-scheduling.md' }]
+              items: [{ text: '分布式调度', link: '/guide/distributed-system/distributed-scheduling.md' }]
             },
             {
               text: "分布式缓存问答",
@@ -264,7 +264,8 @@ export default defineConfig({
             { text: 'Visual Studio Code', link: '/guide/development-tools/vscode.md' },
             { text: 'Emmet语法', link: '/guide/development-tools/emmet.md' },
             { text: 'Gradle', link: '/guide/development-tools/gradle.md' },
-            { text: 'Maven', link: '/guide/development-tools/maven.md' }
+            { text: 'Maven', link: '/guide/development-tools/maven.md' },
+            { text: 'WindTerm', link: '/guide/development-tools/windterm.md' }
           ]
         },
         {
