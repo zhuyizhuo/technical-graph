@@ -87,8 +87,7 @@ export default defineConfig({
           text: "框架与中间件",
           collapsed: false,
           items: [
-            {
-              text: "数据库",
+            { text: "数据库",
               collapsed: true,
               items: [
                 {
@@ -265,7 +264,8 @@ export default defineConfig({
             { text: 'Emmet语法', link: '/guide/development-tools/emmet.md' },
             { text: 'Gradle', link: '/guide/development-tools/gradle.md' },
             { text: 'Maven', link: '/guide/development-tools/maven.md' },
-            { text: 'WindTerm', link: '/guide/development-tools/windterm.md' }
+            { text: 'WindTerm', link: '/guide/development-tools/windterm.md' },
+            { text: 'Dbeaver', link: '/guide/development-tools/dbeaver.md' }
           ]
         },
         {
