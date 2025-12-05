@@ -315,3 +315,16 @@ PostgreSQL支持丰富的数据类型，包括：
 - 限制连接数： 使用连接池减少每个连接的内存开销
 - 监控内存使用情况： 通过操作系统工具和PostgreSQL系统视图
 - 避免过大的work_mem设置，可能导致内存竞争
+
+## 三、示例代码
+
+### Spring Boot集成PostgreSQL示例
+
+GitHub示例代码链接：[spring-boot-postgresql-demo](https://github.com/zhuyizhuo/spring-boot-samples/tree/master/spring-boot-3.x-samples/postgresql-demo)
+
+该示例项目展示了Spring Boot 3.x与PostgreSQL数据库的集成使用，包括：
+- Spring Data JPA的基本配置
+- 实体类映射
+- 数据访问层实现
+- 事务管理
+- 基本CRUD操作示例
